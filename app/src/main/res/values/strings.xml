@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GDG PH</string>
+    <string name="placeholder_text">Fusce fermentum odio nec arcu. Donec sodales sagittis magna. Curabitur blandit mollis lacus. Donec posuere vulputate arcu. Nam adipiscing. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vivamus consectetuer hendrerit lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Vestibulum rutrum, mi nec elementum vehicula, eros quam gravida nisl, id fringilla neque ante vel mi. Praesent ac sem eget est egestas volutpat.</string>
+    <string name="title_activity_details">DetailsActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
