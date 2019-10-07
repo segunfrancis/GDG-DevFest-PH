@@ -1,5 +1,6 @@
 package com.android.segunfrancis.gdgph
 
+import android.animation.AnimatorInflater
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +36,9 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+
+        val welcomeText = findViewById<TextView>(R.id.welcome_text)
+        scaleAnimator(welcomeText)
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -204,6 +209,14 @@ class DetailsActivity : AppCompatActivity() {
                 else -> Glide.with(context)
                     .load(R.drawable.ic_person)
                     .into(profileImage)
+            }
+        }
+
+        fun scaleAnimator(view: View) {
+            val scaleAnimator = AnimatorInflater.loadAnimator(view.context, R.animator.text_animation)
+            scaleAnimator.apply {
+                setTarget(view)
+                start()
             }
         }
     }
