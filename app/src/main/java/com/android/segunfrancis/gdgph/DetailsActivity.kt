@@ -55,7 +55,7 @@ class DetailsActivity : AppCompatActivity() {
                 // Google sign in
                 signIn()
             } else {
-                Snackbar.make(fab, "Already Signed In", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(FAB, "Already Signed In", Snackbar.LENGTH_SHORT).show()
             }
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -64,6 +64,14 @@ class DetailsActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             val bottomSheet = BottomSheet()
             bottomSheet.show(supportFragmentManager, "bottom_sheet")
+        }
+
+        FAB.setOnClickListener {
+            if (auth.currentUser == null) {
+                Snackbar.make(FAB, "Sign in to use this feature", Snackbar.LENGTH_LONG).show()
+            } else {
+                startActivity(Intent(this@DetailsActivity, ChatActivity::class.java))
+            }
         }
     }
 
