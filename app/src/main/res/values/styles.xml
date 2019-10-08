@@ -29,4 +29,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
+    <!-- Dialog Sheet -->
+    <style name="AppDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
 </resources>

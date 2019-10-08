@@ -37,7 +37,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
-            android:maxWidth="280dp"
+            android:maxWidth="480dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             tools:text="Hello this is me" />
     </LinearLayout>
@@ -74,7 +74,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
-            android:maxWidth="280dp"
+            android:maxWidth="480dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@android:color/white"
             tools:text="Hi! How are you?" />
