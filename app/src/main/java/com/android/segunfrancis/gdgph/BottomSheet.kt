@@ -18,7 +18,7 @@ class BottomSheet : BottomSheetDialogFragment() {
         val signOut = view.findViewById<TextView>(R.id.sign_out)
         signOut.setOnClickListener {
             if (DetailsActivity.auth.currentUser != null) {
-                val signOutDialog = MaterialAlertDialogBuilder(view.context)
+                val signOutDialog = MaterialAlertDialogBuilder(view.context, R.style.AppTheme)
                     .setTitle("Are you sure you want to sign out?")
                     .setPositiveButton("YES") { dialogInterface, i ->
                         DetailsActivity.signOut()
