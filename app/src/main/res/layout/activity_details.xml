@@ -29,7 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Welcome"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:paddingEnd="22dp"
@@ -48,12 +48,14 @@
 
     <include layout="@layout/content_details" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_message" />
+        app:icon="@drawable/ic_message"
+        app:iconTint="#FFF"
+        app:backgroundTint="@color/colorPrimary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

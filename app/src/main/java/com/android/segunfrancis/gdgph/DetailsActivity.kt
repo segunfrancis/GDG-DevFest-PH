@@ -20,7 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.makeramen.roundedimageview.RoundedImageView
@@ -38,14 +38,13 @@ class DetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_details)
 
         val welcomeText = findViewById<TextView>(R.id.welcome_text)
-        scaleAnimator(welcomeText)
+        alphaAnimation(welcomeText)
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         auth = FirebaseAuth.getInstance()
@@ -74,6 +73,7 @@ class DetailsActivity : AppCompatActivity() {
         FAB.setOnClickListener {
             if (auth.currentUser == null) {
                 Snackbar.make(FAB, "Sign in to use this feature", Snackbar.LENGTH_LONG).show()
+                scaleAnimator(profileImage)
             } else {
                 startActivity(Intent(this@DetailsActivity, ChatActivity::class.java))
             }
@@ -123,7 +123,6 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
         Log.d(TAG, "FirebaseAuthWithGoogle: " + account.id!!)
-        // TODO: SHow progress dialog
         progressBar.visibility = View.VISIBLE
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential)
@@ -144,7 +143,6 @@ class DetailsActivity : AppCompatActivity() {
                     Snackbar.make(fab, "Authentication Failed.", Snackbar.LENGTH_SHORT)
                         .show()
                 }
-                // TODO: Hide progress bar
                 progressBar.visibility = View.GONE
             }
     }
@@ -184,7 +182,7 @@ class DetailsActivity : AppCompatActivity() {
         private const val TAG = "DetailsActivity"
         private lateinit var googleSignInClient: GoogleSignInClient
         lateinit var auth: FirebaseAuth
-        private lateinit var FAB: FloatingActionButton
+        private lateinit var FAB: ExtendedFloatingActionButton
         private lateinit var profileImage: RoundedImageView
         private lateinit var progressBar: ProgressBar
 
@@ -213,8 +211,16 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         fun scaleAnimator(view: View) {
-            val scaleAnimator = AnimatorInflater.loadAnimator(view.context, R.animator.text_animation)
+            val scaleAnimator = AnimatorInflater.loadAnimator(view.context, R.animator.scale_animation)
             scaleAnimator.apply {
+                setTarget(view)
+                start()
+            }
+        }
+
+        fun alphaAnimation(view: View) {
+            val alphaAnimation = AnimatorInflater.loadAnimator(view.context, R.animator.alpha_animation)
+            alphaAnimation.apply {
                 setTarget(view)
                 start()
             }

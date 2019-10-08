@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.Task
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -32,7 +32,7 @@ class ChatActivity : AppCompatActivity(), AIListener {
 
     private lateinit var mEditText: EditText
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var fab: FloatingActionButton
+    private lateinit var fab: ExtendedFloatingActionButton
     private lateinit var toolbar: MaterialToolbar
     private lateinit var mAIService: AIService
     private lateinit var mReference: DatabaseReference
