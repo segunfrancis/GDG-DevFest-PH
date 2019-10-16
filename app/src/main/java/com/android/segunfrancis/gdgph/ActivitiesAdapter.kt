@@ -1,18 +1,22 @@
 package com.android.segunfrancis.gdgph
 
 import android.content.Context
+import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.makeramen.roundedimageview.RoundedImageView
 
 class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewHolder> {
 
-    private var activitiesList: List<Activities>
+    private var mActivitiesList: List<Activities>
     private var mContext: Context
 
     constructor(data: List<Activities>, mContext: Context) : super() {
-        this.activitiesList = data
+        this.mActivitiesList = data
         this.mContext = mContext
     }
 
@@ -23,16 +27,64 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
         )
     }
 
-    override fun getItemCount() = activitiesList.size
+    override fun getItemCount() = mActivitiesList.size
 
-    override fun onBindViewHolder(holder: ActivitiesViewHolder, position: Int) =
-        holder.bind(activitiesList[position])
+    override fun onBindViewHolder(holder: ActivitiesViewHolder, position: Int) {
+        holder.bind(mActivitiesList[position])
+
+        holder.topicTextView.text = mActivitiesList[position].topic
+        holder.speakerNameTextView.text = mActivitiesList[position].speakerName
+        if (mActivitiesList[position].difficulty == "") {
+            holder.difficultyTextView.visibility = View.GONE
+        } else {
+            holder.difficultyTextView.text = mActivitiesList[position].difficulty
+        }
+        holder.descriptionTextView.text = mActivitiesList[position].description
+        holder.timeTextView.text = mActivitiesList[position].time
+        holder.timeConversationTextView.text = mActivitiesList[position].timeConversation
+        if (mActivitiesList[position].track == "") {
+            holder.trackTextView.visibility = View.GONE
+        } else {
+            holder.trackTextView.text = mActivitiesList[position].track
+        }
+        if (mActivitiesList[position].photoUrl == "") {
+            Glide.with(mContext.applicationContext)
+                .load(R.drawable.ic_person_dark)
+                .placeholder(R.drawable.ic_person_dark)
+                .into(holder.speakerPhoto)
+        } else {
+            Glide.with(mContext.applicationContext)
+                .load(mActivitiesList[position].photoUrl)
+                .placeholder(R.drawable.ic_person_dark)
+                .into(holder.speakerPhoto)
+        }
+    }
 
     class ActivitiesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        lateinit var topicTextView: TextView
+        lateinit var speakerNameTextView: TextView
+        lateinit var difficultyTextView: TextView
+        lateinit var descriptionTextView: TextView
+        lateinit var timeTextView: TextView
+        lateinit var timeConversationTextView: TextView
+        lateinit var trackTextView: TextView
+        lateinit var feedbackTextView: TextView
+        lateinit var speakerPhoto: RoundedImageView
+
         fun bind(item: Activities) = with(itemView) {
-            // TODO: Bind the activitiesList with View
-            setOnClickListener {
-                // TODO: Handle on click
+            topicTextView = findViewById(R.id.tv_topic)
+            speakerNameTextView = findViewById(R.id.tv_speaker)
+            difficultyTextView = findViewById(R.id.tv_difficulty)
+            descriptionTextView = findViewById(R.id.tv_description)
+            timeTextView = findViewById(R.id.tv_time)
+            timeConversationTextView = findViewById(R.id.tv_time_conversation)
+            trackTextView = findViewById(R.id.tv_track)
+            feedbackTextView = findViewById(R.id.tv_feedback)
+            speakerPhoto = findViewById(R.id.speakerPhoto)
+
+            feedbackTextView.setOnClickListener {
+                val intent = Intent(it.context.applicationContext, FeedbackActivity::class.java)
+                it.context.startActivity(intent)
             }
         }
     }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
     tools:context=".DetailsActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -21,19 +20,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/welcome_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Welcome"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:paddingEnd="22dp"
-                android:layout_weight="2"/>
+                android:text="Welcome"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/profile_image"
@@ -46,7 +45,10 @@
         </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <include layout="@layout/content_details" />
+    <include
+        layout="@layout/content_details"
+        app:layout_anchor="@id/toolbar"
+        app:layout_anchorGravity="bottom" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab"
@@ -54,8 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/colorPrimary"
         app:icon="@drawable/ic_message"
-        app:iconTint="#FFF"
-        app:backgroundTint="@color/colorPrimary" />
+        app:iconTint="#FFF" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

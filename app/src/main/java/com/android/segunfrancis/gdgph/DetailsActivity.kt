@@ -13,6 +13,8 @@ import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -23,6 +25,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.*
 import com.makeramen.roundedimageview.RoundedImageView
 
 import kotlinx.android.synthetic.main.activity_details.*
@@ -32,13 +35,46 @@ class DetailsActivity : AppCompatActivity() {
 
     private lateinit var photoUri: Uri
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
+    private lateinit var mReference: DatabaseReference
+    private lateinit var mList: List<Activities>
+    private lateinit var mActivitiesAdapter: ActivitiesAdapter
+    private lateinit var mRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
+        mList = ArrayList()
+        mRecyclerView = findViewById(R.id.recycler_view)
+        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        mReference = FirebaseDatabase.getInstance().reference.child("schedule")
+        mReference.keepSynced(true)
+        mReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                (mList as ArrayList<Activities>).clear()
+                for (snapshot : DataSnapshot in dataSnapshot.children) {
+                    val activity: Activities? = snapshot.getValue(Activities::class.java)
+                    if (activity != null) {
+                        (mList as ArrayList<Activities>).add(activity)
+                        Log.d(TAG, "Photo Url ${activity.photoUrl}")
+                    }
+                }
+                mActivitiesAdapter = ActivitiesAdapter(mList, this@DetailsActivity)
+                mRecyclerView.adapter = mActivitiesAdapter
+            }
+
+            override fun onCancelled(dataSnapshot: DatabaseError) {
+
+            }
+
+        })
+
         val welcomeText = findViewById<TextView>(R.id.welcome_text)
         alphaAnimation(welcomeText)
+        profileImage = findViewById(R.id.profile_image)
+        FAB = findViewById(R.id.fab)
+        progressBar = findViewById(R.id.progress_bar)
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -48,10 +84,6 @@ class DetailsActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         auth = FirebaseAuth.getInstance()
-
-        profileImage = findViewById(R.id.profile_image)
-        FAB = findViewById(R.id.fab)
-        progressBar = findViewById(R.id.progress_bar)
 
         profileImage.setOnClickListener { view ->
             if (auth.currentUser == null) {
@@ -160,11 +192,6 @@ class DetailsActivity : AppCompatActivity() {
                 // User is already signed in
                 photoUri = user.photoUrl!!
                 loadImage(this, photoUri, 0)
-                /*Glide.with(this@DetailsActivity)
-                    .load(photoUri)
-                    .placeholder(R.drawable.ic_person)
-                    //.apply(RequestOptions.circleCropTransform())
-                    .into(profile_image)*/
             }
         }
     }
@@ -211,7 +238,8 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         fun scaleAnimator(view: View) {
-            val scaleAnimator = AnimatorInflater.loadAnimator(view.context, R.animator.scale_animation)
+            val scaleAnimator =
+                AnimatorInflater.loadAnimator(view.context, R.animator.scale_animation)
             scaleAnimator.apply {
                 setTarget(view)
                 start()
@@ -219,7 +247,8 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         fun alphaAnimation(view: View) {
-            val alphaAnimation = AnimatorInflater.loadAnimator(view.context, R.animator.alpha_animation)
+            val alphaAnimation =
+                AnimatorInflater.loadAnimator(view.context, R.animator.alpha_animation)
             alphaAnimation.apply {
                 setTarget(view)
                 start()

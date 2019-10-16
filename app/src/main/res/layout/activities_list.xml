@@ -72,11 +72,11 @@
             android:background="@drawable/user_chat_background"
             android:elevation="4dp"
             android:padding="10dp"
+            android:text="Feedback"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description"
-            tools:text="Feedback" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
         <TextView
             android:id="@+id/tv_description"
@@ -86,11 +86,11 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
-            android:maxLines="3"
+            android:maxLines="2"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_topic"
+            app:layout_constraintTop_toBottomOf="@+id/speakerPhoto"
             tools:text="Quisque ut nisi. Aenean ut eros et nisl sagittis vestibulum. Integer tincidunt. Ut varius tincidunt libero. Donec orci lectus, aliquam ut, faucibus non, euismod id, nulla." />
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -100,6 +100,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_topic"
             app:layout_constraintTop_toTopOf="parent"
@@ -112,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@drawable/chat_bot_background"
-            android:elevation="2dp"
+            android:elevation="1dp"
             android:padding="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintBottom_toBottomOf="@+id/tv_feedback"
@@ -126,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:background="@drawable/chat_bot_background"
-            android:elevation="2dp"
+            android:elevation="1dp"
             android:padding="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintBottom_toBottomOf="@+id/tv_difficulty"
