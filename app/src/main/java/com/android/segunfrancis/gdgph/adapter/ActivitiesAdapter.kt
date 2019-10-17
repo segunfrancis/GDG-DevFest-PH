@@ -89,7 +89,6 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
             feedbackTextView = findViewById(R.id.tv_feedback)
             speakerPhoto = findViewById(R.id.speakerPhoto)
             auth = FirebaseAuth.getInstance()
-            profileImage = findViewById(R.id.profile_image)
 
             feedbackTextView.setOnClickListener {
                 if (auth.currentUser != null) {

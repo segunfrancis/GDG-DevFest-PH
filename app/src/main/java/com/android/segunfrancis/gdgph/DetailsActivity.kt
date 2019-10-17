@@ -46,6 +46,12 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
+        val welcomeText = findViewById<TextView>(R.id.welcome_text)
+        alphaAnimation(welcomeText)
+        profileImage = findViewById(R.id.profile_image)
+        FAB = findViewById(R.id.fab)
+        progressBar = findViewById(R.id.progress_bar)
+
         progressBar.visibility = View.VISIBLE
         mList = ArrayList()
         mRecyclerView = findViewById(R.id.recycler_view)
@@ -62,7 +68,6 @@ class DetailsActivity : AppCompatActivity() {
                     )
                     if (activity != null) {
                         (mList as ArrayList<Activities>).add(activity)
-                        Log.d(TAG, "Photo Url ${activity.photoUrl}")
                     }
                 }
                 mActivitiesAdapter = ActivitiesAdapter(mList, this@DetailsActivity)
@@ -75,12 +80,6 @@ class DetailsActivity : AppCompatActivity() {
             }
 
         })
-
-        val welcomeText = findViewById<TextView>(R.id.welcome_text)
-        alphaAnimation(welcomeText)
-        profileImage = findViewById(R.id.profile_image)
-        FAB = findViewById(R.id.fab)
-        progressBar = findViewById(R.id.progress_bar)
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
