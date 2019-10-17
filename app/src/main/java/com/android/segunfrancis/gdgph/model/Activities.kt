@@ -1,4 +1,4 @@
-package com.android.segunfrancis.gdgph
+package com.android.segunfrancis.gdgph.model
 
 data class Activities(
     var id: String, var speakerName: String, var topic: String, var time: String,

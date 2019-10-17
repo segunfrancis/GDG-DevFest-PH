@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.segunfrancis.gdgph.adapter.ActivitiesAdapter
+import com.android.segunfrancis.gdgph.model.Activities
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -44,6 +46,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
+        progressBar.visibility = View.VISIBLE
         mList = ArrayList()
         mRecyclerView = findViewById(R.id.recycler_view)
         mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -53,8 +56,10 @@ class DetailsActivity : AppCompatActivity() {
         mReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 (mList as ArrayList<Activities>).clear()
-                for (snapshot : DataSnapshot in dataSnapshot.children) {
-                    val activity: Activities? = snapshot.getValue(Activities::class.java)
+                for (snapshot: DataSnapshot in dataSnapshot.children) {
+                    val activity: Activities? = snapshot.getValue(
+                        Activities::class.java
+                    )
                     if (activity != null) {
                         (mList as ArrayList<Activities>).add(activity)
                         Log.d(TAG, "Photo Url ${activity.photoUrl}")
@@ -62,6 +67,7 @@ class DetailsActivity : AppCompatActivity() {
                 }
                 mActivitiesAdapter = ActivitiesAdapter(mList, this@DetailsActivity)
                 mRecyclerView.adapter = mActivitiesAdapter
+                progressBar.visibility = View.GONE
             }
 
             override fun onCancelled(dataSnapshot: DatabaseError) {
@@ -210,7 +216,7 @@ class DetailsActivity : AppCompatActivity() {
         private lateinit var googleSignInClient: GoogleSignInClient
         lateinit var auth: FirebaseAuth
         private lateinit var FAB: ExtendedFloatingActionButton
-        private lateinit var profileImage: RoundedImageView
+        lateinit var profileImage: RoundedImageView
         private lateinit var progressBar: ProgressBar
 
         fun signOut() {

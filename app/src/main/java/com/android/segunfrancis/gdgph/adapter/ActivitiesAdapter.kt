@@ -1,4 +1,4 @@
-package com.android.segunfrancis.gdgph
+package com.android.segunfrancis.gdgph.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.android.segunfrancis.gdgph.DetailsActivity
+import com.android.segunfrancis.gdgph.DetailsActivity.Companion.profileImage
+import com.android.segunfrancis.gdgph.FeedbackActivity
+import com.android.segunfrancis.gdgph.R
+import com.android.segunfrancis.gdgph.model.Activities
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.makeramen.roundedimageview.RoundedImageView
 
 class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewHolder> {
@@ -47,15 +54,14 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
         } else {
             holder.trackTextView.text = mActivitiesList[position].track
         }
-        if (mActivitiesList[position].photoUrl == "") {
+        if (mActivitiesList[position].photoUrl != "") {
             Glide.with(mContext.applicationContext)
-                .load(R.drawable.ic_person_dark)
+                .load(mActivitiesList[position].photoUrl)
                 .placeholder(R.drawable.ic_person_dark)
                 .into(holder.speakerPhoto)
         } else {
             Glide.with(mContext.applicationContext)
-                .load(mActivitiesList[position].photoUrl)
-                .placeholder(R.drawable.ic_person_dark)
+                .load("")
                 .into(holder.speakerPhoto)
         }
     }
@@ -68,8 +74,9 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
         lateinit var timeTextView: TextView
         lateinit var timeConversationTextView: TextView
         lateinit var trackTextView: TextView
-        lateinit var feedbackTextView: TextView
+        private lateinit var feedbackTextView: TextView
         lateinit var speakerPhoto: RoundedImageView
+        private lateinit var auth: FirebaseAuth
 
         fun bind(item: Activities) = with(itemView) {
             topicTextView = findViewById(R.id.tv_topic)
@@ -81,10 +88,17 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
             trackTextView = findViewById(R.id.tv_track)
             feedbackTextView = findViewById(R.id.tv_feedback)
             speakerPhoto = findViewById(R.id.speakerPhoto)
+            auth = FirebaseAuth.getInstance()
+            profileImage = findViewById(R.id.profile_image)
 
             feedbackTextView.setOnClickListener {
-                val intent = Intent(it.context.applicationContext, FeedbackActivity::class.java)
-                it.context.startActivity(intent)
+                if (auth.currentUser != null) {
+                    val intent = Intent(it.context.applicationContext, FeedbackActivity::class.java)
+                    it.context.startActivity(intent)
+                } else {
+                    Snackbar.make(feedbackTextView, "Sign in to give feedback", Snackbar.LENGTH_LONG).show()
+                    DetailsActivity.scaleAnimator(profileImage)
+                }
             }
         }
     }

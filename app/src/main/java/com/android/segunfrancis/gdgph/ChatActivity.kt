@@ -18,6 +18,8 @@ import android.view.MenuItem
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.segunfrancis.gdgph.adapter.ChatAdapter
+import com.android.segunfrancis.gdgph.model.Chat
 import com.google.android.gms.tasks.Task
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -82,10 +84,12 @@ class ChatActivity : AppCompatActivity(), AIListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     (mList as ArrayList<Chat>).clear()
                     for (snapshot: DataSnapshot in dataSnapshot.children) {
-                        val message: Chat? = snapshot.getValue(Chat::class.java)
+                        val message: Chat? = snapshot.getValue(
+                            Chat::class.java)
                         (mList as ArrayList<Chat>).add(message!!)
                     }
-                    mChatAdapter = ChatAdapter(this@ChatActivity, mList)
+                    mChatAdapter =
+                        ChatAdapter(this@ChatActivity, mList)
                     mRecyclerView.adapter = mChatAdapter
                     mRecyclerView.scrollToPosition(mList.size - 1)
                 }
@@ -129,7 +133,8 @@ class ChatActivity : AppCompatActivity(), AIListener {
                         if (aiResponse != null) {
                             val result = aiResponse.result
                             val reply = result.fulfillment.speech
-                            val messageReply = Chat(reply, "bot")
+                            val messageReply =
+                                Chat(reply, "bot")
                             mReference.child(mAuth.uid.toString())
                                 .child("chat").push().setValue(messageReply)
                         }
