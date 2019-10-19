@@ -15,7 +15,9 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.segunfrancis.gdgph.adapter.ChatAdapter
@@ -41,6 +43,7 @@ class ChatActivity : AppCompatActivity(), AIListener {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mList: List<Chat>
     private lateinit var mChatAdapter: ChatAdapter
+    private lateinit var mProgressBar: ProgressBar
     private var clientAccessToken = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,10 +53,12 @@ class ChatActivity : AppCompatActivity(), AIListener {
         mAuth = FirebaseAuth.getInstance()
 
         toolbar = findViewById(R.id.toolbar)
+        mProgressBar = findViewById(R.id.progress_bar)
         mRecyclerView = findViewById(R.id.chat_recycler_view)
         mEditText = findViewById(R.id.messageEditText)
         fab = findViewById(R.id.floatingActionButton)
 
+        mProgressBar.visibility = View.VISIBLE
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener {
             onBackPressed()
@@ -88,10 +93,10 @@ class ChatActivity : AppCompatActivity(), AIListener {
                             Chat::class.java)
                         (mList as ArrayList<Chat>).add(message!!)
                     }
-                    mChatAdapter =
-                        ChatAdapter(this@ChatActivity, mList)
+                    mChatAdapter = ChatAdapter(this@ChatActivity, mList)
                     mRecyclerView.adapter = mChatAdapter
                     mRecyclerView.scrollToPosition(mList.size - 1)
+                    mProgressBar.visibility = View.GONE
                 }
 
                 override fun onCancelled(p0: DatabaseError) {

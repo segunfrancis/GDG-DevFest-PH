@@ -78,7 +78,6 @@ class DetailsActivity : AppCompatActivity() {
             override fun onCancelled(dataSnapshot: DatabaseError) {
 
             }
-
         })
 
         // Configure Google Sign In

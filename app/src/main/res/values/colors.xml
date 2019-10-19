@@ -5,5 +5,6 @@
     <color name="colorAccent">#FF2020</color>
 
     <color name="lightGray">#CCC</color>
+    <color name="gray">#868686</color>
     <color name="darkGray">#666</color>
 </resources>

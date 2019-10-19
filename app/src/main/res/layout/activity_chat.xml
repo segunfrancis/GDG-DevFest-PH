@@ -23,14 +23,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/chat_bot_background"
+        android:elevation="2dp"
         android:ems="10"
         android:hint="Enter message"
-        android:textSize="12sp"
-        android:textColor="@color/darkGray"
         android:inputType="text|textCapSentences"
-        android:padding="12dp"
         android:maxLines="4"
-        android:elevation="2dp"
+        android:padding="12dp"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/floatingActionButton"
         app:layout_constraintEnd_toStartOf="@id/floatingActionButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,9 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        app:backgroundTint="@color/colorPrimary"
         app:icon="@drawable/ic_send"
         app:iconTint="#FFF"
-        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -54,24 +54,22 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
-        android:padding="4dp"
         app:buttonGravity="center_vertical"
-        app:navigationIcon="@drawable/ic_arrow_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chat"
-                android:textColor="@android:color/white"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="18sp"/>
-        </LinearLayout>
-    </com.google.android.material.appbar.MaterialToolbar>
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:title="Chat"
+        app:titleTextColor="@android:color/white" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/chat_recycler_view"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
