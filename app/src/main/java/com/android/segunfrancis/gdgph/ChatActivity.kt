@@ -53,7 +53,7 @@ class ChatActivity : AppCompatActivity(), AIListener {
         mAuth = FirebaseAuth.getInstance()
 
         toolbar = findViewById(R.id.toolbar)
-        mProgressBar = findViewById(R.id.progress_bar)
+        mProgressBar = findViewById(R.id.progress_bar_chat)
         mRecyclerView = findViewById(R.id.chat_recycler_view)
         mEditText = findViewById(R.id.messageEditText)
         fab = findViewById(R.id.floatingActionButton)

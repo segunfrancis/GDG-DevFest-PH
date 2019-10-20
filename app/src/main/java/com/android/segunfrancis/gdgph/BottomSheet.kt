@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.loadImage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -24,10 +25,10 @@ class BottomSheet : BottomSheetDialogFragment() {
                         DetailsActivity.signOut()
                         dialogInterface.dismiss()
                         dialog?.dismiss()
-                        DetailsActivity.loadImage(
+                        loadImage(
                             view.context.applicationContext,
                             null,
-                            R.drawable.ic_person
+                            R.drawable.avatar
                         )
                     }
                     .setNegativeButton("NO") { dialogInterface, i ->

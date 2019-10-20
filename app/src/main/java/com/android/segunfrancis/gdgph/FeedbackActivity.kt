@@ -27,7 +27,7 @@ class FeedbackActivity : AppCompatActivity() {
         }
 
         mMaterialButton = findViewById(R.id.send_feedback)
-        mProgressBar = findViewById(R.id.progressBar)
+        mProgressBar = findViewById(R.id.progressBar_horizontal)
 
         mMaterialButton.setOnClickListener {
             mProgressBar.visibility = View.VISIBLE

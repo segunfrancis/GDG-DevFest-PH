@@ -96,7 +96,7 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
                     it.context.startActivity(intent)
                 } else {
                     Snackbar.make(feedbackTextView, "Sign in to give feedback", Snackbar.LENGTH_LONG).show()
-                    DetailsActivity.scaleAnimator(profileImage)
+                    //DetailsActivity.scaleAnimator(profileImage)
                 }
             }
         }

@@ -2,35 +2,41 @@ package com.android.segunfrancis.gdgph
 
 import android.animation.AnimatorInflater
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android.segunfrancis.gdgph.adapter.ActivitiesAdapter
-import com.android.segunfrancis.gdgph.model.Activities
-import com.bumptech.glide.Glide
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.loadImage
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.updateSignInText
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
 import com.makeramen.roundedimageview.RoundedImageView
 
-import kotlinx.android.synthetic.main.activity_details.*
 import java.lang.Exception
 
 class DetailsActivity : AppCompatActivity() {
@@ -38,47 +44,40 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var photoUri: Uri
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
     private lateinit var mReference: DatabaseReference
-    private lateinit var mList: List<Activities>
-    private lateinit var mActivitiesAdapter: ActivitiesAdapter
-    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-        val welcomeText = findViewById<TextView>(R.id.welcome_text)
-        alphaAnimation(welcomeText)
-        profileImage = findViewById(R.id.profile_image)
+        DetailsActivity.Companion.setContext(this)
+
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        // Initiate navigation header view items
+        val headerView = navView.getHeaderView(0)
+        displayName = headerView.findViewById(R.id.display_name)
+        emailAddress = headerView.findViewById(R.id.email_address)
+        profileImage = headerView.findViewById(R.id.profile_image)
+        loginButton = headerView.findViewById(R.id.logout_button)
+
+        val navController = findNavController(R.id.nav_host_fragment)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_tools, R.id.nav_share, R.id.nav_send
+            ), drawerLayout
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+
         FAB = findViewById(R.id.fab)
-        progressBar = findViewById(R.id.progress_bar)
-
-        progressBar.visibility = View.VISIBLE
-        mList = ArrayList()
-        mRecyclerView = findViewById(R.id.recycler_view)
-        mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        mReference = FirebaseDatabase.getInstance().reference.child("schedule")
-        mReference.keepSynced(true)
-        mReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                (mList as ArrayList<Activities>).clear()
-                for (snapshot: DataSnapshot in dataSnapshot.children) {
-                    val activity: Activities? = snapshot.getValue(
-                        Activities::class.java
-                    )
-                    if (activity != null) {
-                        (mList as ArrayList<Activities>).add(activity)
-                    }
-                }
-                mActivitiesAdapter = ActivitiesAdapter(mList, this@DetailsActivity)
-                mRecyclerView.adapter = mActivitiesAdapter
-                progressBar.visibility = View.GONE
-            }
-
-            override fun onCancelled(dataSnapshot: DatabaseError) {
-
-            }
-        })
+        progressBar = findViewById(R.id.progress_bar_detail)
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -89,31 +88,49 @@ class DetailsActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        profileImage.setOnClickListener { view ->
+        loginButton.setOnClickListener {
             if (auth.currentUser == null) {
                 progressBar.visibility = View.VISIBLE
                 // Google sign in
                 signIn()
             } else {
-                Snackbar.make(FAB, "Already Signed In", Snackbar.LENGTH_SHORT).show()
+                val signOutDialog = MaterialAlertDialogBuilder(this@DetailsActivity)
+                signOutDialog.apply {
+                    title = "Are you sure you want to sign out?"
+                    setPositiveButton("YES") { dialogInterface, i ->
+                        signOut()
+                        updateSignInText("", "", "Sign in")
+                        dialogInterface.dismiss()
+                    }
+                    setNegativeButton("NO") { dialogInterface, i ->
+                        dialogInterface.dismiss()
+                    }
+                    create()
+                    show()
+                }
             }
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        /*val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.setNavigationOnClickListener {
             val bottomSheet = BottomSheet()
             bottomSheet.show(supportFragmentManager, "bottom_sheet")
-        }
+        }*/
 
         FAB.setOnClickListener {
             if (auth.currentUser == null) {
                 Snackbar.make(FAB, "Sign in to use this feature", Snackbar.LENGTH_LONG).show()
-                scaleAnimator(profileImage)
+                //scaleAnimator(profileImage)
             } else {
                 startActivity(Intent(this@DetailsActivity, ChatActivity::class.java))
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     override fun onStart() {
@@ -122,6 +139,11 @@ class DetailsActivity : AppCompatActivity() {
         if (auth.currentUser != null) {
             val currentUser = auth.currentUser
             photoUri = currentUser?.photoUrl!!
+            updateSignInText(
+                auth.currentUser?.displayName.toString(),
+                auth.currentUser?.email.toString(),
+                "Sign out"
+            )
         }
         setUpAuth()
         attachListener()
@@ -142,16 +164,22 @@ class DetailsActivity : AppCompatActivity() {
                 // Google sign in was successful, authenticate with firebase
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
-                Snackbar.make(fab, "Google sign in successful", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(FAB, "Google sign in successful", Snackbar.LENGTH_SHORT).show()
                 if (progressBar.isVisible) {
                     progressBar.visibility = View.GONE
                 }
+                updateSignInText(
+                    auth.currentUser?.displayName.toString(),
+                    auth.currentUser?.email.toString(),
+                    "Sign out"
+                )
             } catch (e: Exception) {
                 // Google sign in failed
                 Log.w(TAG, "Google sign in failed", e)
                 Toast.makeText(this, "Error ${e.message}", Toast.LENGTH_SHORT).show()
                 if (progressBar.isVisible) {
                     progressBar.visibility = View.GONE
+                    updateSignInText("", "", "Sign in")
                 }
             }
         }
@@ -167,17 +195,23 @@ class DetailsActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-                    Snackbar.make(fab, "Authentication Successful.", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(FAB, "Authentication Successful.", Snackbar.LENGTH_SHORT)
                         .show()
                     photoUri = user?.photoUrl!!
                     loadImage(this, photoUri, 0)
                     Log.d(TAG, "Photo URI:  $photoUri")
                     progressBar.visibility = View.GONE
+                    updateSignInText(
+                        auth.currentUser?.displayName.toString(),
+                        auth.currentUser?.email.toString(),
+                        "Sign out"
+                    )
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    Snackbar.make(fab, "Authentication Failed.", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(FAB, "Authentication Failed.", Snackbar.LENGTH_SHORT)
                         .show()
+                    loginButton.text = "Sign In"
                 }
                 progressBar.visibility = View.GONE
             }
@@ -215,7 +249,14 @@ class DetailsActivity : AppCompatActivity() {
         lateinit var auth: FirebaseAuth
         private lateinit var FAB: ExtendedFloatingActionButton
         lateinit var profileImage: RoundedImageView
-        private lateinit var progressBar: ProgressBar
+        lateinit var displayName: TextView
+        lateinit var emailAddress: TextView
+        lateinit var loginButton: Button
+        private lateinit var context: Context
+
+        fun setContext(context: Context) {
+            this.context = context
+        }
 
         fun signOut() {
             // Firebase sign out
@@ -224,21 +265,9 @@ class DetailsActivity : AppCompatActivity() {
             // Google sign out
             googleSignInClient.signOut().addOnSuccessListener {
                 Snackbar.make(FAB, "Signed Out", Snackbar.LENGTH_SHORT).show()
+                updateSignInText("", "", "Sign In")
             }
-        }
-
-        fun loadImage(context: Context, uri: Uri?, id: Int) {
-            when {
-                id == 0 -> Glide.with(context)
-                    .load(uri)
-                    .into(profileImage)
-                uri == null -> Glide.with(context)
-                    .load(id)
-                    .into(profileImage)
-                else -> Glide.with(context)
-                    .load(R.drawable.ic_person)
-                    .into(profileImage)
-            }
+            loadImage(context, null, R.drawable.avatar)
         }
 
         fun scaleAnimator(view: View) {

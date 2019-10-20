@@ -63,7 +63,7 @@
         app:titleTextColor="@android:color/white" />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progress_bar_chat"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="40dp"
         android:layout_height="40dp"
