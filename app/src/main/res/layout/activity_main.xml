@@ -25,7 +25,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#66000000"/>
+            android:background="#66000000" />
 
     </FrameLayout>
 
@@ -74,8 +74,8 @@
         android:layout_marginEnd="8dp"
         android:padding="8dp"
         android:text="@string/placeholder_text"
-        android:textColor="@android:color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView5" />
@@ -84,12 +84,14 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="nextActivity"
         android:text="Continue"
         android:textAllCaps="false"
-        android:onClick="nextActivity"
-        android:layout_marginBottom="16dp"
+        android:textSize="18sp"
+        app:backgroundTint="#AA1A73E8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

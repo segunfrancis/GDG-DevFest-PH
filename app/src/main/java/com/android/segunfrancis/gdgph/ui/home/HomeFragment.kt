@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
                 showSnackBar("Sign in to use this feature")
             } else {
                 startActivity(Intent(root.context, ChatActivity::class.java))
+                activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         }
 
