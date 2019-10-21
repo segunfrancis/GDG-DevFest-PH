@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
@@ -15,6 +16,7 @@ import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -46,6 +48,7 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var mReference: DatabaseReference
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var progressBar: ProgressBar
+    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +58,7 @@ class DetailsActivity : AppCompatActivity() {
 
         DetailsActivity.Companion.setContext(this)
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         // Initiate navigation header view items
         val headerView = navView.getHeaderView(0)
@@ -90,13 +93,14 @@ class DetailsActivity : AppCompatActivity() {
 
         loginButton.setOnClickListener {
             if (auth.currentUser == null) {
+                drawerLayout.closeDrawer(GravityCompat.START)
                 progressBar.visibility = View.VISIBLE
                 // Google sign in
                 signIn()
             } else {
                 val signOutDialog = MaterialAlertDialogBuilder(this@DetailsActivity)
                 signOutDialog.apply {
-                    title = "Are you sure you want to sign out?"
+                    setMessage("Are you sure you want to sign out?")
                     setPositiveButton("YES") { dialogInterface, i ->
                         signOut()
                         updateSignInText("", "", "Sign in")
@@ -105,9 +109,8 @@ class DetailsActivity : AppCompatActivity() {
                     setNegativeButton("NO") { dialogInterface, i ->
                         dialogInterface.dismiss()
                     }
-                    create()
-                    show()
                 }
+                signOutDialog.create().show()
             }
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -206,6 +209,7 @@ class DetailsActivity : AppCompatActivity() {
                         auth.currentUser?.email.toString(),
                         "Sign out"
                     )
+                    drawerLayout.openDrawer(GravityCompat.START)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
