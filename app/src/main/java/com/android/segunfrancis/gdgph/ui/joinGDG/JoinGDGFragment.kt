@@ -31,6 +31,8 @@ class JoinGDGFragment : Fragment() {
         meetupButton.setOnClickListener {
             val builder = CustomTabsIntent.Builder()
             builder.setToolbarColor(resources.getColor(R.color.colorPrimary))
+            builder.setStartAnimations(root.context, R.anim.slide_in_right, R.anim.slide_out_left)
+            builder.setExitAnimations(root.context, R.anim.slide_in_left, R.anim.slide_out_right)
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(root.context, Uri.parse(gdgUrl))
         }
