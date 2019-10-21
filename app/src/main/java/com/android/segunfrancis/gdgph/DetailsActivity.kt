@@ -2,18 +2,15 @@ package com.android.segunfrancis.gdgph
 
 import android.animation.AnimatorInflater
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -25,6 +22,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.loadImage
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.showSnackBar
 import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.updateSignInText
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -32,7 +30,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -72,14 +69,13 @@ class DetailsActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_home, R.id.nav_about_us, R.id.nav_feedback,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        FAB = findViewById(R.id.fab)
         progressBar = findViewById(R.id.progress_bar_detail)
 
         // Configure Google Sign In
@@ -111,6 +107,7 @@ class DetailsActivity : AppCompatActivity() {
                     }
                 }
                 signOutDialog.create().show()
+                drawerLayout.closeDrawer(GravityCompat.START)
             }
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -120,15 +117,6 @@ class DetailsActivity : AppCompatActivity() {
             val bottomSheet = BottomSheet()
             bottomSheet.show(supportFragmentManager, "bottom_sheet")
         }*/
-
-        FAB.setOnClickListener {
-            if (auth.currentUser == null) {
-                Snackbar.make(FAB, "Sign in to use this feature", Snackbar.LENGTH_LONG).show()
-                //scaleAnimator(profileImage)
-            } else {
-                startActivity(Intent(this@DetailsActivity, ChatActivity::class.java))
-            }
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -167,7 +155,7 @@ class DetailsActivity : AppCompatActivity() {
                 // Google sign in was successful, authenticate with firebase
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
-                Snackbar.make(FAB, "Google sign in successful", Snackbar.LENGTH_SHORT).show()
+                showSnackBar("Google sign in successful")
                 if (progressBar.isVisible) {
                     progressBar.visibility = View.GONE
                 }
@@ -179,7 +167,7 @@ class DetailsActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 // Google sign in failed
                 Log.w(TAG, "Google sign in failed", e)
-                Toast.makeText(this, "Error ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error ${e.message}", Toast.LENGTH_LONG).show()
                 if (progressBar.isVisible) {
                     progressBar.visibility = View.GONE
                     updateSignInText("", "", "Sign in")
@@ -198,8 +186,7 @@ class DetailsActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-                    Snackbar.make(FAB, "Authentication Successful.", Snackbar.LENGTH_SHORT)
-                        .show()
+                    showSnackBar("Authentication Successful.")
                     photoUri = user?.photoUrl!!
                     loadImage(this, photoUri, 0)
                     Log.d(TAG, "Photo URI:  $photoUri")
@@ -213,8 +200,7 @@ class DetailsActivity : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    Snackbar.make(FAB, "Authentication Failed.", Snackbar.LENGTH_SHORT)
-                        .show()
+                    showSnackBar("Authentication Failed.")
                     loginButton.text = "Sign In"
                 }
                 progressBar.visibility = View.GONE
@@ -251,7 +237,6 @@ class DetailsActivity : AppCompatActivity() {
         private const val TAG = "DetailsActivity"
         private lateinit var googleSignInClient: GoogleSignInClient
         lateinit var auth: FirebaseAuth
-        private lateinit var FAB: ExtendedFloatingActionButton
         lateinit var profileImage: RoundedImageView
         lateinit var displayName: TextView
         lateinit var emailAddress: TextView
@@ -268,7 +253,7 @@ class DetailsActivity : AppCompatActivity() {
 
             // Google sign out
             googleSignInClient.signOut().addOnSuccessListener {
-                Snackbar.make(FAB, "Signed Out", Snackbar.LENGTH_SHORT).show()
+                showSnackBar("Signed Out")
                 updateSignInText("", "", "Sign In")
             }
             loadImage(context, null, R.drawable.avatar)

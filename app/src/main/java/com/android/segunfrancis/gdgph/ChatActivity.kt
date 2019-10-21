@@ -30,8 +30,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-private const val TAG = "ChatActivity"
-
 class ChatActivity : AppCompatActivity(), AIListener {
 
     private lateinit var mEditText: EditText
@@ -222,5 +220,9 @@ class ChatActivity : AppCompatActivity(), AIListener {
                     Log.e(TAG, "ERROR: ${task.exception}")
                 }
             }
+    }
+
+    companion object {
+        private const val TAG = "ChatActivity"
     }
 }

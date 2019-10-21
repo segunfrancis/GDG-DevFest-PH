@@ -1,10 +1,14 @@
 package com.android.segunfrancis.gdgph.utility
 
 import android.content.Context
+import android.content.res.Resources
 import android.net.Uri
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat.getColor
 import com.android.segunfrancis.gdgph.DetailsActivity
 import com.android.segunfrancis.gdgph.R
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 
 class MethodUtils {
     companion object {
@@ -26,6 +30,15 @@ class MethodUtils {
             DetailsActivity.displayName.text = name
             DetailsActivity.emailAddress.text = email
             DetailsActivity.loginButton.text = status
+        }
+
+        fun showSnackBar(message: String) {
+            val snackBar =
+                Snackbar.make(DetailsActivity.profileImage, message, Snackbar.LENGTH_LONG)
+            val snackBarView = snackBar.view
+            //snackBarView.setBackgroundColor(Resources.getSystem().getColor(R.color.colorPrimary))
+            snackBarView.setBackgroundResource(R.color.colorPrimary)
+            snackBar.show()
         }
     }
 }

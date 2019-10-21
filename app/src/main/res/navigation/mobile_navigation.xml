@@ -12,21 +12,21 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.android.segunfrancis.gdgph.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:id="@+id/nav_about_us"
+        android:name="com.android.segunfrancis.gdgph.ui.about.AboutFragment"
+        android:label="@string/menu_about"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.android.segunfrancis.gdgph.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:id="@+id/nav_feedback"
+        android:name="com.android.segunfrancis.gdgph.ui.feedback.FeedbackFragment"
+        android:label="@string/menu_feedback"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_tools"
         android:name="com.android.segunfrancis.gdgph.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
+        android:label="@string/menu_contact_us"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
