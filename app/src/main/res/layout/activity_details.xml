@@ -12,7 +12,7 @@
     <include
         layout="@layout/content_details"
         app:layout_anchor="@id/toolbar"
-        app:layout_anchorGravity="bottom" />
+        app:layout_anchorGravity="bottom"/>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
