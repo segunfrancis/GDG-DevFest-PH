@@ -24,10 +24,10 @@
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.android.segunfrancis.gdgph.ui.tools.ToolsFragment"
-        android:label="@string/menu_contact_us"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_join_gdg"
+        android:name="com.android.segunfrancis.gdgph.ui.joinGDG.JoinGDGFragment"
+        android:label="@string/menu_join_gdg"
+        tools:layout="@layout/fragment_join_gdg" />
 
     <fragment
         android:id="@+id/nav_share"

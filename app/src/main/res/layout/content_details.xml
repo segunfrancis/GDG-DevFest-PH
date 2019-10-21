@@ -8,6 +8,7 @@
     tools:context=".DetailsActivity"
     tools:showIn="@layout/activity_details">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"

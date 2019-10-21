@@ -1,8 +1,10 @@
 package com.android.segunfrancis.gdgph.utility
 
+import android.animation.AnimatorInflater
 import android.content.Context
 import android.content.res.Resources
 import android.net.Uri
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat.getColor
 import com.android.segunfrancis.gdgph.DetailsActivity
@@ -39,6 +41,15 @@ class MethodUtils {
             //snackBarView.setBackgroundColor(Resources.getSystem().getColor(R.color.colorPrimary))
             snackBarView.setBackgroundResource(R.color.colorPrimary)
             snackBar.show()
+        }
+
+        fun scaleAnimator(view: View) {
+            val scaleAnimator =
+                AnimatorInflater.loadAnimator(view.context, R.animator.scale_animation)
+            scaleAnimator.apply {
+                setTarget(view)
+                start()
+            }
         }
     }
 }

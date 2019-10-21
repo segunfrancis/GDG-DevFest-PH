@@ -17,9 +17,9 @@
             android:icon="@drawable/ic_feedback"
             android:title="@string/menu_feedback" />
         <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_contact_us" />
+            android:id="@+id/nav_join_gdg"
+            android:icon="@drawable/ic_gdg_logob"
+            android:title="@string/menu_join_gdg" />
     </group>
 
     <item android:title="Communicate">

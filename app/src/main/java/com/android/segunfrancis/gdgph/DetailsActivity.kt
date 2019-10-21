@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
@@ -13,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -70,7 +72,7 @@ class DetailsActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_about_us, R.id.nav_feedback,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send
+                R.id.nav_join_gdg, R.id.nav_share, R.id.nav_send
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -257,15 +259,6 @@ class DetailsActivity : AppCompatActivity() {
                 updateSignInText("", "", "Sign In")
             }
             loadImage(context, null, R.drawable.avatar)
-        }
-
-        fun scaleAnimator(view: View) {
-            val scaleAnimator =
-                AnimatorInflater.loadAnimator(view.context, R.animator.scale_animation)
-            scaleAnimator.apply {
-                setTarget(view)
-                start()
-            }
         }
 
         fun alphaAnimation(view: View) {

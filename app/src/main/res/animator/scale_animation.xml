@@ -4,18 +4,18 @@
     <objectAnimator
         android:duration="1500"
         android:propertyName="scaleX"
-        android:repeatCount="5"
+        android:repeatCount="1"
         android:repeatMode="reverse"
-        android:valueFrom="0.9"
-        android:valueTo="1.3"
+        android:valueFrom="1"
+        android:valueTo="1.2"
         android:valueType="floatType" />
 
     <objectAnimator
         android:duration="1500"
         android:propertyName="scaleY"
-        android:repeatCount="5"
+        android:repeatCount="1"
         android:repeatMode="reverse"
-        android:valueFrom="0.9"
-        android:valueTo="1.3"
+        android:valueFrom="1"
+        android:valueTo="1.2"
         android:valueType="floatType" />
 </set>
