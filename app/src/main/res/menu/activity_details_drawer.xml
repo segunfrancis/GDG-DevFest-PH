@@ -4,7 +4,7 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
+       <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             android:title="@string/menu_home" />
@@ -17,22 +17,20 @@
             android:icon="@drawable/ic_gdg_logob"
             android:title="@string/menu_join_gdg" />
     </group>
-
-    <item android:title="">
-        <menu>
-            <item
-                android:id="@+id/nav_about_us"
-                android:icon="@drawable/ic_about_us"
-                android:title="@string/menu_about" />
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
-        </menu>
-    </item>
-
+        <item android:title="">
+            <menu>
+                <item
+                    android:id="@+id/nav_about_us"
+                    android:icon="@drawable/ic_about_us"
+                    android:title="@string/menu_about" />
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="@string/menu_share" />
+                <item
+                    android:id="@+id/nav_send"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/menu_send" />
+            </menu>
+        </item>
 </menu>

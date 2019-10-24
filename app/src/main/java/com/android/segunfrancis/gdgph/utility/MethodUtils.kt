@@ -2,15 +2,13 @@ package com.android.segunfrancis.gdgph.utility
 
 import android.animation.AnimatorInflater
 import android.content.Context
-import android.content.res.Resources
 import android.net.Uri
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat.getColor
 import com.android.segunfrancis.gdgph.DetailsActivity
 import com.android.segunfrancis.gdgph.R
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import com.makeramen.roundedimageview.RoundedImageView
 
 class MethodUtils {
     companion object {
@@ -26,6 +24,12 @@ class MethodUtils {
                     .load(R.drawable.avatar)
                     .into(DetailsActivity.profileImage)
             }
+        }
+
+        fun loadImage(context: Context, res: Int, image: RoundedImageView) {
+            Glide.with(context)
+                .load(res)
+                .into(image)
         }
 
         fun updateSignInText(name: String, email: String, status: String) {

@@ -20,12 +20,11 @@
                 android:layout_height="wrap_content">
 
                 <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/image_view"
+                    android:id="@+id/my_profile_image"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/profile_photo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +42,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/image_view" />
+                    app:layout_constraintTop_toBottomOf="@id/my_profile_image" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -117,10 +116,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_gmail"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/linkedin_image"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -133,7 +130,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_linkedin"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/twitter_image"
                     app:layout_constraintStart_toEndOf="@+id/gmail_image"
@@ -147,7 +143,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_twitter"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/linkedin_image"
