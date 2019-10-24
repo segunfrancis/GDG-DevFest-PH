@@ -1,5 +1,7 @@
 package com.android.segunfrancis.gdgph.ui.about
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +33,27 @@ class AboutFragment : Fragment() {
         MethodUtils.loadImage(root.context, R.drawable.ic_gmail, gmailIcon)
         MethodUtils.loadImage(root.context, R.drawable.ic_linkedin, linkedInIcon)
         MethodUtils.loadImage(root.context, R.drawable.ic_twitter, twitterIcon)
+
+        gmailIcon.setOnClickListener {
+            val myEmailAddress = "mailto:francis4dblues@gmail.com"
+            val emailAddressUri = Uri.parse(myEmailAddress)
+            val gmailIntent = Intent(Intent.ACTION_SENDTO, emailAddressUri)
+            startActivity(Intent.createChooser(gmailIntent, "Select Email Application"))
+        }
+
+        linkedInIcon.setOnClickListener {
+            val linkedInAddress = "https://www.linkedin.com/in/segun-francis-302361a1"
+            val linkedInUri = Uri.parse(linkedInAddress)
+            val twitterIntent = Intent(Intent.ACTION_VIEW, linkedInUri)
+            startActivity(Intent.createChooser(twitterIntent, "Select Application"))
+        }
+
+        twitterIcon.setOnClickListener {
+            val twitterAddress = "https://www.twitter.com/segun__francis"
+            val twitterUri = Uri.parse(twitterAddress)
+            val twitterIntent = Intent(Intent.ACTION_VIEW, twitterUri)
+            startActivity(Intent.createChooser(twitterIntent, "Select Application"))
+        }
 
         aboutViewModel.text.observe(this, Observer {
 
