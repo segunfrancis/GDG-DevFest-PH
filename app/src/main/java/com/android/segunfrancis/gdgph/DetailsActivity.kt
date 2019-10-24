@@ -198,7 +198,6 @@ class DetailsActivity : AppCompatActivity() {
                         auth.currentUser?.email.toString(),
                         "Sign out"
                     )
-                    drawerLayout.openDrawer(GravityCompat.START)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)

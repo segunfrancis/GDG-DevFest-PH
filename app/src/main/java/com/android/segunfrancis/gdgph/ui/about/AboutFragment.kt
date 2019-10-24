@@ -21,10 +21,9 @@ class AboutFragment : Fragment() {
     ): View? {
         aboutViewModel =
             ViewModelProviders.of(this).get(AboutViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
+        val root = inflater.inflate(R.layout.fragment_about_developer, container, false)
         aboutViewModel.text.observe(this, Observer {
-            textView.text = it
+
         })
         return root
     }

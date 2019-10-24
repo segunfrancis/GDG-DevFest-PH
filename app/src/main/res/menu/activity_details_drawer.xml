@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_home"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_about_us"
-            android:icon="@drawable/ic_about_us"
-            android:title="@string/menu_about" />
-        <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_feedback"
             android:title="@string/menu_feedback" />
@@ -22,8 +18,12 @@
             android:title="@string/menu_join_gdg" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="">
         <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/ic_about_us"
+                android:title="@string/menu_about" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
