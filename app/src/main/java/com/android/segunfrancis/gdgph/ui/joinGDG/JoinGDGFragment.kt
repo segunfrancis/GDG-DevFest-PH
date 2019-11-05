@@ -26,8 +26,12 @@ class JoinGDGFragment : Fragment() {
             ViewModelProviders.of(this).get(JoinGDGViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_join_gdg, container, false)
         val meetupButton: MaterialButton = root.findViewById(R.id.button_meetup)
+        val whatsappButton: MaterialButton = root.findViewById(R.id.button_whatsapp)
+        val instagramButton: MaterialButton = root.findViewById(R.id.button_instagram)
         scaleAnimator(meetupButton)
         val gdgUrl = "https://www.meetup.com/GDG-Port-Harcourt/"
+        val whatsappUrl = "https://chat.whatsapp.com/8DxFlE14fO21PxMQcTOfoh"
+        val instagramUrl = "https://instagram.com/gdgphc/"
         meetupButton.setOnClickListener {
             val builder = CustomTabsIntent.Builder()
             builder.setToolbarColor(resources.getColor(R.color.colorPrimary))
@@ -35,6 +39,24 @@ class JoinGDGFragment : Fragment() {
             builder.setExitAnimations(root.context, R.anim.slide_in_left, R.anim.slide_out_right)
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(root.context, Uri.parse(gdgUrl))
+        }
+
+        whatsappButton.setOnClickListener {
+            val builder = CustomTabsIntent.Builder()
+            builder.setToolbarColor(resources.getColor(R.color.colorPrimary))
+            builder.setStartAnimations(root.context, R.anim.slide_in_right, R.anim.slide_out_left)
+            builder.setExitAnimations(root.context, R.anim.slide_in_left, R.anim.slide_out_right)
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(root.context, Uri.parse(whatsappUrl))
+        }
+
+        instagramButton.setOnClickListener {
+            val builder = CustomTabsIntent.Builder()
+            builder.setToolbarColor(resources.getColor(R.color.colorPrimary))
+            builder.setStartAnimations(root.context, R.anim.slide_in_right, R.anim.slide_out_left)
+            builder.setExitAnimations(root.context, R.anim.slide_in_left, R.anim.slide_out_right)
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(root.context, Uri.parse(instagramUrl))
         }
         joinGDGViewModel.text.observe(this, Observer {
 

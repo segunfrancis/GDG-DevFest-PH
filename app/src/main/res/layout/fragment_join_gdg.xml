@@ -5,8 +5,10 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/imageView9"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/image_description"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_contact2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,12 +20,43 @@
         android:id="@+id/button_meetup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Meet Up"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:backgroundTint="@color/green"
+        app:layout_constraintBottom_toTopOf="@id/button_whatsapp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_whatsapp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Whatsapp"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:backgroundTint="@color/green"
+        app:layout_constraintBottom_toTopOf="@+id/button_instagram"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_meetup" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_instagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Instagram"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:backgroundTint="@color/green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button_whatsapp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
