@@ -29,7 +29,7 @@ class AboutFragment : Fragment() {
         gmailIcon = root.findViewById(R.id.gmail_image)
         linkedInIcon = root.findViewById(R.id.linkedin_image)
         twitterIcon = root.findViewById(R.id.twitter_image)
-        whatsappIcon = root.findViewById(R.id.twitter_image)
+        whatsappIcon = root.findViewById(R.id.whatsapp_image)
 
         MethodUtils.loadImage(root.context, R.drawable.profile_photo, myProfileImage)
         MethodUtils.loadImage(root.context, R.drawable.ic_gmail, gmailIcon)
@@ -51,7 +51,7 @@ class AboutFragment : Fragment() {
             startActivity(Intent.createChooser(twitterIntent, "Select Application"))
         }
 
-        twitterIcon.setOnClickListener {
+        whatsappIcon.setOnClickListener {
             val whatsappAddress = "https://api.whatsapp.com/send?phone=2348076840302"
             val whatsappUri = Uri.parse(whatsappAddress)
             val twitterIntent = Intent(Intent.ACTION_VIEW, whatsappUri)
