@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
@@ -14,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -31,9 +29,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GetTokenResult
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
 import com.makeramen.roundedimageview.RoundedImageView
@@ -198,6 +199,14 @@ class DetailsActivity : AppCompatActivity() {
                         auth.currentUser?.email.toString(),
                         "Sign out"
                     )
+                    // Get Access Token
+                    user.getIdToken(true).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d(TAG, "Token: ${task.result?.token}")
+                        } else {
+                            Log.d(TAG, "Error: ", task.exception)
+                        }
+                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)

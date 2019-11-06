@@ -21,7 +21,7 @@
         android:id="@+id/nav_feedback"
         android:name="com.android.segunfrancis.gdgph.ui.feedback.FeedbackFragment"
         android:label="@string/menu_feedback"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_feedback" />
 
     <fragment
         android:id="@+id/nav_join_gdg"
