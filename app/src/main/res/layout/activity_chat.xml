@@ -31,6 +31,7 @@
         android:padding="12dp"
         android:textColor="@color/gray"
         android:textSize="12sp"
+        android:fontFamily="@font/raleway"
         app:layout_constraintBottom_toBottomOf="@id/floatingActionButton"
         app:layout_constraintEnd_toStartOf="@id/floatingActionButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,8 +60,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="Chat"
-        app:titleTextColor="@android:color/white" />
+        app:title="Chat Bot"
+        app:titleTextColor="@android:color/white"/>
 
     <ProgressBar
         android:id="@+id/progress_bar_chat"

@@ -37,6 +37,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/raleway_bold"
                     android:text="Segun Francis"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -48,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/raleway_semibold"
                     android:text="Android Developer"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -72,11 +74,12 @@
 
                 <TextView
                     android:id="@+id/description"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/raleway"
                     android:text="I love learning new things, playing video games and sleeping. \nI love building android applications with simple and intuitive user interfaces. \nI made this app using the android material design components"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -84,10 +87,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/raleway"
                     android:text="Learning Kotlin wasn\'t easy but it has been eventful. This application was built using the Kotlin programming language. \nViewModel architecture was used and Firebase was used for google authentication and data storage."
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -111,41 +115,49 @@
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/gmail_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/linkedin_image"
-                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:riv_corner_radius="560dp" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/linkedin_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/twitter_image"
+                    app:layout_constraintEnd_toStartOf="@+id/whatsapp_image"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/gmail_image"
                     app:layout_constraintTop_toTopOf="parent"
                     app:riv_corner_radius="560dp" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/whatsapp_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/twitter_image"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/linkedin_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="560dp" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/twitter_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/linkedin_image"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/whatsapp_image"
                     app:layout_constraintTop_toTopOf="parent"
                     app:riv_corner_radius="560dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>

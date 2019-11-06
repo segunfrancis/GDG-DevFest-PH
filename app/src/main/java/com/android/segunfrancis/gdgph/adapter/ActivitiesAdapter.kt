@@ -12,6 +12,7 @@ import com.android.segunfrancis.gdgph.DetailsActivity.Companion.profileImage
 import com.android.segunfrancis.gdgph.FeedbackActivity
 import com.android.segunfrancis.gdgph.R
 import com.android.segunfrancis.gdgph.model.Activities
+import com.android.segunfrancis.gdgph.utility.MethodUtils
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -95,8 +96,8 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
                     val intent = Intent(it.context.applicationContext, FeedbackActivity::class.java)
                     it.context.startActivity(intent)
                 } else {
-                    Snackbar.make(feedbackTextView, "Sign in to give feedback", Snackbar.LENGTH_LONG).show()
-                    //DetailsActivity.scaleAnimator(profileImage)
+                    MethodUtils.showSnackBar("Sign in to give feedback")
+                    //Snackbar.make(feedbackTextView, "Sign in to give feedback", Snackbar.LENGTH_LONG).show()
                 }
             }
         }

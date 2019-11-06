@@ -16,11 +16,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/background_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/landing_ph" />
+            android:scaleType="centerCrop"/>
 
         <View
             android:layout_width="match_parent"
@@ -46,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GDG"
+        android:fontFamily="@font/raleway_bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@android:color/white"
         android:textSize="36sp"
@@ -58,6 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DevFest"
+        android:fontFamily="@font/raleway_bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@android:color/white"
         android:textSize="30sp"
@@ -70,8 +72,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="@font/raleway_semibold"
         android:padding="8dp"
         android:text="@string/placeholder_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -86,6 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="@font/raleway_bold"
         android:onClick="nextActivity"
         android:text="Continue"
         android:textAllCaps="false"
