@@ -1,5 +1,7 @@
 package com.android.segunfrancis.gdgph.ui.joinGDG
 
+import android.animation.Animator
+import android.animation.AnimatorInflater
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,7 +30,80 @@ class JoinGDGFragment : Fragment() {
         val meetupButton: MaterialButton = root.findViewById(R.id.button_meetup)
         val whatsappButton: MaterialButton = root.findViewById(R.id.button_whatsapp)
         val instagramButton: MaterialButton = root.findViewById(R.id.button_instagram)
-        scaleAnimator(meetupButton)
+        //scaleAnimator(meetupButton)
+
+        val meetupButtonAnimation =
+            AnimatorInflater.loadAnimator(context, R.animator.scale_animation)
+        meetupButtonAnimation.apply {
+            setTarget(meetupButton)
+            start()
+            addListener(object : Animator.AnimatorListener {
+                override fun onAnimationRepeat(p0: Animator?) {
+
+                }
+
+                override fun onAnimationEnd(p0: Animator?) {
+                    val whatsappButtonAnimation =
+                        AnimatorInflater.loadAnimator(context, R.animator.scale_animation)
+                    whatsappButtonAnimation.apply {
+                        setTarget(whatsappButton)
+                        start()
+                        addListener(object : Animator.AnimatorListener {
+                            override fun onAnimationRepeat(p0: Animator?) {
+
+                            }
+
+                            override fun onAnimationEnd(p0: Animator?) {
+                                val instagramButtonAnimation =
+                                    AnimatorInflater.loadAnimator(
+                                        context,
+                                        R.animator.scale_animation
+                                    )
+                                instagramButtonAnimation.apply {
+                                    setTarget(instagramButton)
+                                    start()
+                                    addListener(object : Animator.AnimatorListener {
+                                        override fun onAnimationRepeat(p0: Animator?) {
+
+                                        }
+
+                                        override fun onAnimationEnd(p0: Animator?) {
+
+                                        }
+
+                                        override fun onAnimationCancel(p0: Animator?) {
+
+                                        }
+
+                                        override fun onAnimationStart(p0: Animator?) {
+
+                                        }
+                                    })
+                                }
+                            }
+
+                            override fun onAnimationCancel(p0: Animator?) {
+
+                            }
+
+                            override fun onAnimationStart(p0: Animator?) {
+
+                            }
+                        })
+                    }
+                }
+
+                override fun onAnimationCancel(p0: Animator?) {
+
+                }
+
+                override fun onAnimationStart(p0: Animator?) {
+
+                }
+            })
+        }
+
+
         val gdgUrl = "https://www.meetup.com/GDG-Port-Harcourt/"
         val whatsappUrl = "https://chat.whatsapp.com/8DxFlE14fO21PxMQcTOfoh"
         val instagramUrl = "https://instagram.com/gdgphc/"

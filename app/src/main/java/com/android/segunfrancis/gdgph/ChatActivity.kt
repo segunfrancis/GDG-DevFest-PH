@@ -18,10 +18,12 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
+import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.segunfrancis.gdgph.adapter.ChatAdapter
 import com.android.segunfrancis.gdgph.model.Chat
+import com.android.segunfrancis.gdgph.utility.MethodUtils
 import com.google.android.gms.tasks.Task
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -42,6 +44,7 @@ class ChatActivity : AppCompatActivity(), AIListener {
     private lateinit var mList: List<Chat>
     private lateinit var mChatAdapter: ChatAdapter
     private lateinit var mProgressBar: ProgressBar
+    private lateinit var placeHolderText: Group
     private var clientAccessToken = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +58,7 @@ class ChatActivity : AppCompatActivity(), AIListener {
         mRecyclerView = findViewById(R.id.chat_recycler_view)
         mEditText = findViewById(R.id.messageEditText)
         fab = findViewById(R.id.floatingActionButton)
+        placeHolderText = findViewById(R.id.placeholder_text_group)
 
         mProgressBar.visibility = View.VISIBLE
         setSupportActionBar(toolbar)
@@ -63,6 +67,11 @@ class ChatActivity : AppCompatActivity(), AIListener {
         }
 
         mList = ArrayList<Chat>()
+        if (mList.isEmpty()) {
+            placeHolderText.visibility = View.VISIBLE
+        } else {
+            placeHolderText.visibility = View.INVISIBLE
+        }
 
         mRecyclerView.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
@@ -95,6 +104,11 @@ class ChatActivity : AppCompatActivity(), AIListener {
                     mRecyclerView.adapter = mChatAdapter
                     mRecyclerView.scrollToPosition(mList.size - 1)
                     mProgressBar.visibility = View.GONE
+                    if (mList.isEmpty()) {
+                        placeHolderText.visibility = View.VISIBLE
+                    } else {
+                        placeHolderText.visibility = View.INVISIBLE
+                    }
                 }
 
                 override fun onCancelled(p0: DatabaseError) {
@@ -214,9 +228,9 @@ class ChatActivity : AppCompatActivity(), AIListener {
             .removeValue()
             .addOnCompleteListener { task: Task<Void> ->
                 if (task.isSuccessful) {
-                    Snackbar.make(fab, "Deleted", Snackbar.LENGTH_LONG).show()
+                    displaySnackBar(mEditText, "Deleted")
                 } else {
-                    Snackbar.make(fab, "ERROR: ${task.exception}", Snackbar.LENGTH_LONG).show()
+                    displaySnackBar(mEditText, "Error deleting messages")
                     Log.e(TAG, "ERROR: ${task.exception}")
                 }
             }
@@ -229,5 +243,13 @@ class ChatActivity : AppCompatActivity(), AIListener {
 
     companion object {
         private const val TAG = "ChatActivity"
+
+        fun displaySnackBar(view: View, message: String) {
+            val snackBar =
+                Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+            val snackBarView = snackBar.view
+            snackBarView.setBackgroundResource(R.color.colorPrimary)
+            snackBar.show()
+        }
     }
 }

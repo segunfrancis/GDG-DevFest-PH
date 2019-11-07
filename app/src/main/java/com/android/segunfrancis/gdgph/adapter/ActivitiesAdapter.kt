@@ -7,14 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.android.segunfrancis.gdgph.DetailsActivity
-import com.android.segunfrancis.gdgph.DetailsActivity.Companion.profileImage
 import com.android.segunfrancis.gdgph.FeedbackActivity
 import com.android.segunfrancis.gdgph.R
 import com.android.segunfrancis.gdgph.model.Activities
 import com.android.segunfrancis.gdgph.utility.MethodUtils
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.makeramen.roundedimageview.RoundedImageView
 
@@ -65,6 +62,12 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
                 .load("")
                 .into(holder.speakerPhoto)
         }
+        if (mActivitiesList[position].feedback != "") {
+            holder.feedbackTextView.visibility = View.VISIBLE
+            holder.feedbackTextView.text = "Feedback"
+        } else {
+            holder.feedbackTextView.visibility = View.INVISIBLE
+        }
     }
 
     class ActivitiesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -75,7 +78,7 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
         lateinit var timeTextView: TextView
         lateinit var timeConversationTextView: TextView
         lateinit var trackTextView: TextView
-        private lateinit var feedbackTextView: TextView
+        lateinit var feedbackTextView: TextView
         lateinit var speakerPhoto: RoundedImageView
         private lateinit var auth: FirebaseAuth
 
@@ -97,7 +100,6 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
                     it.context.startActivity(intent)
                 } else {
                     MethodUtils.showSnackBar("Sign in to give feedback")
-                    //Snackbar.make(feedbackTextView, "Sign in to give feedback", Snackbar.LENGTH_LONG).show()
                 }
             }
         }
