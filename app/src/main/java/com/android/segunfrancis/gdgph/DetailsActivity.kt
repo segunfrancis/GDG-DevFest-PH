@@ -29,12 +29,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GetTokenResult
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
 import com.makeramen.roundedimageview.RoundedImageView
@@ -73,7 +70,7 @@ class DetailsActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_about_us, R.id.nav_feedback,
-                R.id.nav_join_gdg, R.id.nav_share, R.id.nav_send
+                R.id.nav_join_gdg, R.id.nav_share, R.id.nav_organisers
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

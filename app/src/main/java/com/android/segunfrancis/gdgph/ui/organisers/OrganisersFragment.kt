@@ -1,4 +1,4 @@
-package com.android.segunfrancis.gdgph.ui.send
+package com.android.segunfrancis.gdgph.ui.organisers
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.android.segunfrancis.gdgph.R
 
-class SendFragment : Fragment() {
+class OrganisersFragment : Fragment() {
 
-    private lateinit var sendViewModel: SendViewModel
+    private lateinit var organisersViewModel: OrganisersViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sendViewModel =
-            ViewModelProviders.of(this).get(SendViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_send, container, false)
+        organisersViewModel =
+            ViewModelProviders.of(this).get(OrganisersViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_organisers, container, false)
         val textView: TextView = root.findViewById(R.id.text_send)
-        sendViewModel.text.observe(this, Observer {
+        organisersViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root
