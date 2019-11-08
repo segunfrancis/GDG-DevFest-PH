@@ -39,14 +39,12 @@ class HomeFragment : Fragment() {
             }
         }
 
-
         val progressBar: ProgressBar = root.findViewById(R.id.progress_bar)
         progressBar.visibility = View.VISIBLE
         recyclerView.layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.VERTICAL, false)
 
         homeViewModel.recyclerView.observe(this, Observer {
             mActivitiesAdapter = ActivitiesAdapter(it, root.context)
-            Log.d(TAG, "Activities: $it")
             recyclerView.adapter = mActivitiesAdapter
             progressBar.visibility = View.GONE
         })

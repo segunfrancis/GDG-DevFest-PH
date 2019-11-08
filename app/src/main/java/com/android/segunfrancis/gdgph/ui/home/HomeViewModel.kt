@@ -1,6 +1,5 @@
 package com.android.segunfrancis.gdgph.ui.home
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.segunfrancis.gdgph.model.Activities
@@ -21,11 +20,9 @@ class HomeViewModel : ViewModel() {
                     val activity: Activities? = snapshot.getValue(Activities::class.java)
                     if (activity != null) {
                         (mList as ArrayList<Activities>).add(activity)
-                        Log.d(TAG, "ViewModel list: $mList")
                     }
                 }
                 value = mList
-                Log.d(TAG, "ViewModel value: $mList")
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
