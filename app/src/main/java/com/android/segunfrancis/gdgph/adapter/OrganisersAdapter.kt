@@ -10,7 +10,6 @@ import com.android.segunfrancis.gdgph.R
 import com.android.segunfrancis.gdgph.model.Organisers
 import com.bumptech.glide.Glide
 import com.makeramen.roundedimageview.RoundedImageView
-import kotlinx.android.synthetic.main.organisers_list.view.*
 
 class OrganisersAdapter: RecyclerView.Adapter<OrganisersAdapter.OrganisersViewHolder> {
 
