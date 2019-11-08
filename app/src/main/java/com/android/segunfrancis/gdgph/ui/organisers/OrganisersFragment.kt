@@ -29,7 +29,7 @@ class OrganisersFragment : Fragment() {
             ViewModelProviders.of(this).get(OrganisersViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_organisers, container, false)
         val organisers: ArrayList<Organisers> = ArrayList()
-        val gino = Organisers("Gino Osahon", "GDG CLoud Port Harcourt", "https://images.unsplash.com/photo-1531299983330-093763e1d963?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60")
+        val gino = Organisers("Gino Osahon", "GDG CLoud Port Harcourt", "https://images.unsplash.com/photo-1531299983330-093763e1d963?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"/*"https://drive.google.com/file/d/16rBEIsne0MTHz1dckdKrgi_Y9xkJIKP5/view?usp=sharing"*/)
         val philip = Organisers("Philip Obiorah", "GDG CLoud Port Harcourt", "https://images.unsplash.com/photo-1506634572416-48cdfe530110?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60")
         val gloria = Organisers("Gloria Ojukwu", "GDG CLoud Port Harcourt", "https://images.unsplash.com/photo-1495994132590-5c7b6c4fffec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60")
         val albert = Organisers("Albert Amas", "GDG Port Harcourt", "https://images.unsplash.com/photo-1518882570151-157128e78fa1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60")
