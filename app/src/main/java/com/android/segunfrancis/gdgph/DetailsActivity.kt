@@ -33,7 +33,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.database.*
 import com.makeramen.roundedimageview.RoundedImageView
 
 import java.lang.Exception
@@ -42,7 +41,6 @@ class DetailsActivity : AppCompatActivity() {
 
     private lateinit var photoUri: Uri
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
-    private lateinit var mReference: DatabaseReference
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var progressBar: ProgressBar
     private lateinit var drawerLayout: DrawerLayout
@@ -70,11 +68,47 @@ class DetailsActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_about_us, R.id.nav_feedback,
-                R.id.nav_join_gdg, R.id.nav_share, R.id.nav_organisers
+                R.id.nav_join_gdg, R.id.nav_speakers, R.id.nav_organisers
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+       /* navView.setNavigationItemSelectedListener { item ->
+            val id = item.itemId
+            var fragment: Fragment? = null
+            var tag = ""
+            when (id) {
+                R.id.nav_home -> {
+                    fragment = HomeFragment()
+                    tag = "HomeFragment"
+                }
+                R.id.nav_feedback -> {
+                    fragment = FeedbackFragment()
+                    tag = "FeedbackFragment"
+                }
+                R.id.nav_about_us -> {
+                    fragment = AboutFragment()
+                    tag = "AboutFragment"
+                }
+                R.id.nav_join_gdg -> {
+                    fragment = JoinGDGFragment()
+                    tag = "JoinGDGFragment"
+                }
+                R.id.nav_organisers -> {
+                    fragment = OrganisersFragment()
+                    tag = "OrganisersFragment"
+                }
+                R.id.nav_share -> {
+                    fragment = SpeakersFragment()
+                    tag = "SpeakersFragment"
+                }
+            }
+            if (fragment != null) {
+                drawerNavigation(fragment, tag)
+            }
+            true
+        }*/
 
         progressBar = findViewById(R.id.progress_bar_detail)
 

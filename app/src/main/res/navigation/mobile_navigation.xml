@@ -30,9 +30,9 @@
         tools:layout="@layout/fragment_join_gdg" />
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.android.segunfrancis.gdgph.ui.share.ShareFragment"
-        android:label="@string/menu_share"
+        android:id="@+id/nav_speakers"
+        android:name="com.android.segunfrancis.gdgph.ui.speakers.SpeakersFragment"
+        android:label="@string/menu_speakers"
         tools:layout="@layout/fragment_share" />
 
     <fragment

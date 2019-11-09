@@ -1,4 +1,4 @@
-package com.android.segunfrancis.gdgph.ui.share
+package com.android.segunfrancis.gdgph.ui.speakers
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.android.segunfrancis.gdgph.R
 
-class ShareFragment : Fragment() {
+class SpeakersFragment : Fragment() {
 
-    private lateinit var shareViewModel: ShareViewModel
+    private lateinit var speakersViewModel: SpeakersViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        shareViewModel =
-            ViewModelProviders.of(this).get(ShareViewModel::class.java)
+        speakersViewModel =
+            ViewModelProviders.of(this).get(SpeakersViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_share, container, false)
         val textView: TextView = root.findViewById(R.id.text_share)
-        shareViewModel.text.observe(this, Observer {
+        speakersViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

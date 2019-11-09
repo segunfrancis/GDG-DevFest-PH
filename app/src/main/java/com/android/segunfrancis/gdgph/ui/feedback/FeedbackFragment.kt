@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.RatingBar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.android.segunfrancis.gdgph.R
@@ -75,6 +76,7 @@ class FeedbackFragment : Fragment() {
             mReference.push().setValue(feedback).addOnSuccessListener {
                 progress.visibility = View.INVISIBLE
                 MethodUtils.showSnackBar("Thanks for your feedback")
+                clear()
             }.addOnFailureListener {
                 progress.visibility = View.INVISIBLE
                 MethodUtils.showSnackBar("Something went wrong")
@@ -101,5 +103,18 @@ class FeedbackFragment : Fragment() {
         timeManagement.isEnabled = true
         overall.isEnabled = true
         feedbackComplain.isEnabled = true
+    }
+
+    private fun clear() {
+        planning.rating = 0f
+        venue.rating = 0f
+        timeManagement.rating = 0f
+        overall.rating = 0f
+        feedbackComplain.isEnabled = true
+        feedbackComplain.text.clear()
+        submit.isEnabled = true
+        submit.text = "Send Feedback"
+        val ft : FragmentTransaction? = fragmentManager?.beginTransaction()
+        ft?.detach(this)?.attach(this)?.commit()
     }
 }

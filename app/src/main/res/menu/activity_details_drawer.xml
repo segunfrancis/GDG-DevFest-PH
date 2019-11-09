@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_home"
             android:title="@string/menu_home" />
         <item
+            android:id="@+id/nav_speakers"
+            android:icon="@drawable/ic_microphone"
+            android:title="@string/menu_speakers" />
+        <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_feedback"
             android:title="@string/menu_feedback" />
@@ -27,10 +31,6 @@
                 android:id="@+id/nav_about_us"
                 android:icon="@drawable/ic_about_us"
                 android:title="@string/menu_about" />
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
         </menu>
     </item>
 </menu>

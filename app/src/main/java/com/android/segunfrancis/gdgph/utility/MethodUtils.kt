@@ -5,6 +5,7 @@ import android.animation.AnimatorInflater
 import android.content.Context
 import android.net.Uri
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.android.segunfrancis.gdgph.DetailsActivity
 import com.android.segunfrancis.gdgph.R
 import com.bumptech.glide.Glide
@@ -55,6 +56,10 @@ class MethodUtils {
                 setTarget(view)
                 start()
             }
+        }
+
+        fun drawerNavigation(fragment: Fragment, tag: String) {
+            fragment.fragmentManager?.beginTransaction()?.replace(R.id.container, fragment, tag)?.commit()
         }
     }
 }

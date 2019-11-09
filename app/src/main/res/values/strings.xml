@@ -18,6 +18,6 @@
     <string name="menu_about">About Developer</string>
     <string name="menu_feedback">Feedback</string>
     <string name="menu_join_gdg">Join GDG</string>
-    <string name="menu_share">Share</string>
+    <string name="menu_speakers">Speakers</string>
     <string name="menu_organisers">Organisers</string>
 </resources>

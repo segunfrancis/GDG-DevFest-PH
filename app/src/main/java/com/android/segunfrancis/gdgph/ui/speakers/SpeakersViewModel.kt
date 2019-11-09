@@ -1,10 +1,10 @@
-package com.android.segunfrancis.gdgph.ui.share
+package com.android.segunfrancis.gdgph.ui.speakers
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShareViewModel : ViewModel() {
+class SpeakersViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is share Fragment"
