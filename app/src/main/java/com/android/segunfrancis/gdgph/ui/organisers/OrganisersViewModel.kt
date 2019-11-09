@@ -1,10 +1,7 @@
 package com.android.segunfrancis.gdgph.ui.organisers
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.segunfrancis.gdgph.adapter.OrganisersAdapter
-import com.android.segunfrancis.gdgph.model.Activities
 import com.android.segunfrancis.gdgph.model.Organisers
 import com.google.firebase.database.*
 

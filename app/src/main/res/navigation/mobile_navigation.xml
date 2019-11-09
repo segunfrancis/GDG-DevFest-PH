@@ -33,7 +33,7 @@
         android:id="@+id/nav_speakers"
         android:name="com.android.segunfrancis.gdgph.ui.speakers.SpeakersFragment"
         android:label="@string/menu_speakers"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_speakers" />
 
     <fragment
         android:id="@+id/nav_organisers"
