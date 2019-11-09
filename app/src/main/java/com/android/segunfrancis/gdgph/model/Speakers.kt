@@ -7,7 +7,7 @@ data class Speakers(
     var tagLine: String,
     var bio: String,
     var profilePicture: String,
-    var sessions: String
+    var sessions: List<Int>
 ) : Serializable {
-    constructor() : this("", "", "", "", "")
+    constructor() : this("", "", "", "", listOf(-1))
 }

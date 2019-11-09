@@ -1,13 +1,16 @@
 package com.android.segunfrancis.gdgph.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.segunfrancis.gdgph.R
+import com.android.segunfrancis.gdgph.SpeakerDetails
 import com.android.segunfrancis.gdgph.model.Speakers
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.INTENT_KEY
 import com.bumptech.glide.Glide
 import com.makeramen.roundedimageview.RoundedImageView
 
@@ -46,6 +49,12 @@ class SpeakersAdapter : RecyclerView.Adapter<SpeakersAdapter.SpeakersViewHolder>
             speakerName = itemView.findViewById(R.id.organiser_name)
             speakerTag = itemView.findViewById(R.id.organiser_community)
             speakerImage = itemView.findViewById(R.id.organiser_image)
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, SpeakerDetails::class.java)
+                intent.putExtra(INTENT_KEY, items)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 }

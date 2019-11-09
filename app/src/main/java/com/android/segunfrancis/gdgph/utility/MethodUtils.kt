@@ -1,6 +1,5 @@
 package com.android.segunfrancis.gdgph.utility
 
-import android.animation.Animator
 import android.animation.AnimatorInflater
 import android.content.Context
 import android.net.Uri
@@ -61,5 +60,7 @@ class MethodUtils {
         fun drawerNavigation(fragment: Fragment, tag: String) {
             fragment.fragmentManager?.beginTransaction()?.replace(R.id.container, fragment, tag)?.commit()
         }
+
+        const val INTENT_KEY = "com.android.segunfrancis.gdgph.MethodUtils.INTENT_KEY"
     }
 }

@@ -31,8 +31,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/raleway_semibold"
-            app:layout_constraintEnd_toEndOf="@id/organiser_image"
-            app:layout_constraintStart_toStartOf="@id/organiser_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/organiser_image"
             tools:text="Markus Heinzchtfield" />
 
@@ -46,8 +46,8 @@
             android:fontFamily="@font/raleway"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/organiser_image"
-            app:layout_constraintStart_toStartOf="@id/organiser_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/organiser_name"
             tools:text="GDG Cloud Port Harcourt" />
     </androidx.constraintlayout.widget.ConstraintLayout>
