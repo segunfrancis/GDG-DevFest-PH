@@ -13,9 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.android.segunfrancis.gdgph.R
 import com.android.segunfrancis.gdgph.model.Feedback
-import com.android.segunfrancis.gdgph.ui.home.HomeFragment
 import com.android.segunfrancis.gdgph.utility.MethodUtils
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -77,9 +75,6 @@ class FeedbackFragment : Fragment() {
             mReference.push().setValue(feedback).addOnSuccessListener {
                 progress.visibility = View.INVISIBLE
                 MethodUtils.showSnackBar("Thanks for your feedback")
-                val fragment = HomeFragment()
-                fragment.fragmentManager?.beginTransaction()
-                    ?.replace(R.id.container, fragment, "feedback")?.commit()
             }.addOnFailureListener {
                 progress.visibility = View.INVISIBLE
                 MethodUtils.showSnackBar("Something went wrong")
