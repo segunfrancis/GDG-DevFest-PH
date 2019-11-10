@@ -230,14 +230,6 @@ class DetailsActivity : AppCompatActivity() {
                         auth.currentUser?.email.toString(),
                         "Sign out"
                     )
-                    // Get Access Token
-                    user.getIdToken(true).addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Log.d(TAG, "Token: ${task.result?.token}")
-                        } else {
-                            Log.d(TAG, "Error: ", task.exception)
-                        }
-                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
