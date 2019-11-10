@@ -14,8 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SpeakerDetails"></activity>
-        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".SpeakerDetails" />
+        <activity
+            android:name=".FeedbackActivity"/>
         <activity android:name=".ChatActivity" />
         <activity
             android:name=".DetailsActivity"
