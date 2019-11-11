@@ -15,10 +15,6 @@ class OnBoardingFragment1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_onboarding_1, container, false)
-        val backgroundImage = view.findViewById<ImageView>(R.id.background_image)
-        Glide.with(view.context)
-            .load(R.drawable.background_ph)
-            .into(backgroundImage)
         return view
     }
 

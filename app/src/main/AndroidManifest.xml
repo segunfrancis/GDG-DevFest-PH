@@ -15,8 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SpeakerDetails" />
-        <activity
-            android:name=".FeedbackActivity"/>
+        <activity android:name=".FeedbackActivity" />
         <activity android:name=".ChatActivity" />
         <activity
             android:name=".DetailsActivity"
@@ -27,7 +26,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.segunfrancis.gdgph.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

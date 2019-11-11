@@ -2,16 +2,23 @@ package com.android.segunfrancis.gdgph
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.android.segunfrancis.gdgph.adapter.PagerAdapter
+import com.bumptech.glide.Glide
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val onBoardingImage = findViewById<ImageView>(R.id.onboarding_image)
+        Glide.with(this@MainActivity)
+            .load(R.drawable.meetup_cover_light)
+            .into(onBoardingImage)
 
         setUpViewPager()
     }

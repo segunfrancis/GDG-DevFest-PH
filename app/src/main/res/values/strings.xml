@@ -20,4 +20,10 @@
     <string name="menu_join_gdg">Join GDG</string>
     <string name="menu_speakers">Speakers</string>
     <string name="menu_organisers">Organisers</string>
+    <string name="date"><b>Date:</b> 16th November, 2019</string>
+    <string name="time"><b>Time:</b> 10 am</string>
+    <string name="venue"><b>Venue:</b> Knowledge Development Centre\n202a Aba Road, Port Harcourt</string>
+    <string name="description_1">GDG DevFest Port Harcourt is an annual developer community-run festival organised by developers in Port Harcourt.</string>
+    <string name="description_2">Join us on Saturday 16th November as we feature sessions on Android, Google Cloud Platform, Google Assistant, Flutter, Machine Learning with Tensor-Flow, and Mobile web.</string>
+    <string name="description_3">You can check our events schedule here and plan to attend the sessions that fit your profile or things you\'d like to learn about.</string>
 </resources>
