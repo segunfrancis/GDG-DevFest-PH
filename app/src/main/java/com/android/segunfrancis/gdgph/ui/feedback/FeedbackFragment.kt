@@ -16,6 +16,7 @@ import com.android.segunfrancis.gdgph.R
 import com.android.segunfrancis.gdgph.model.Feedback
 import com.android.segunfrancis.gdgph.utility.MethodUtils
 import com.google.android.material.button.MaterialButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -26,7 +27,7 @@ class FeedbackFragment : Fragment() {
     }
 
     private lateinit var feedbackViewModel: FeedbackViewModel
-    private lateinit var planning: RatingBar
+    private lateinit var refreshment: RatingBar
     private lateinit var venue: RatingBar
     private lateinit var timeManagement: RatingBar
     private lateinit var overall: RatingBar
@@ -34,6 +35,7 @@ class FeedbackFragment : Fragment() {
     private lateinit var submit: MaterialButton
     private lateinit var progress: ProgressBar
     private lateinit var mReference: DatabaseReference
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +49,9 @@ class FeedbackFragment : Fragment() {
         feedbackViewModel.text.observe(this, Observer {
             //textView.text = it
         })
+        mAuth = FirebaseAuth.getInstance()
         mReference = FirebaseDatabase.getInstance().getReference("feedback")
-        planning = root.findViewById(R.id.ratingBar_event_planning)
+        refreshment = root.findViewById(R.id.ratingBar_refreshment)
         venue = root.findViewById(R.id.ratingBar_event_venue)
         timeManagement = root.findViewById(R.id.ratingBar_time_management)
         overall = root.findViewById(R.id.ratingBar_overall_event_rating)
@@ -56,41 +59,66 @@ class FeedbackFragment : Fragment() {
         submit = root.findViewById(R.id.send_feedback)
         progress = root.findViewById(R.id.progressBar_horizontal)
 
-        submit.setOnClickListener {
-            submit.text = "Sending..."
-            submit.isEnabled = false
-            disable()
-            progress.visibility = View.VISIBLE
-            val planningRating = planning.rating
-            val venueRating = venue.rating
-            val timeRating = timeManagement.rating
-            val overallRating = overall.rating
-            val comments = feedbackComplain.text.toString()
+        if (savedInstanceState != null) {
+            refreshment.rating = savedInstanceState.getFloat("refreshment")
+            venue.rating = savedInstanceState.getFloat("venue")
+            timeManagement.rating = savedInstanceState.getFloat("time")
+            overall.rating = savedInstanceState.getFloat("overall")
+            feedbackComplain.setText(savedInstanceState.getString("comment"))
+        }
 
-            val feedback = Feedback()
-            feedback.planningRating = planningRating
-            feedback.venueRating = venueRating
-            feedback.timeRating = timeRating
-            feedback.overallRating = overallRating
-            feedback.comments = comments
-            mReference.push().setValue(feedback).addOnSuccessListener {
-                progress.visibility = View.INVISIBLE
-                MethodUtils.showSnackBar("Thanks for your feedback")
-                clear()
-            }.addOnFailureListener {
-                progress.visibility = View.INVISIBLE
-                MethodUtils.showSnackBar("Something went wrong")
-                enable()
-                submit.text = "Send Feedback"
-                submit.isEnabled = true
-                Log.e(TAG, "Error: ${it.localizedMessage}")
+        submit.setOnClickListener {
+            if (mAuth.currentUser == null) {
+                MethodUtils.showSnackBar("Sign in to send feedback")
+            } else {
+                if (refreshment.rating == 0f || venue.rating == 0f || timeManagement.rating == 0f) {
+                    MethodUtils.showSnackBar("A rating of 0 is not allowed")
+                } else {
+                    submit.text = "Sending..."
+                    submit.isEnabled = false
+                    disable()
+                    progress.visibility = View.VISIBLE
+                    val refreshmentRating = refreshment.rating
+                    val venueRating = venue.rating
+                    val timeRating = timeManagement.rating
+                    val overallRating = overall.rating
+                    val comments = feedbackComplain.text.toString()
+
+                    val feedback = Feedback()
+                    feedback.refreshmentRating = refreshmentRating
+                    feedback.venueRating = venueRating
+                    feedback.timeRating = timeRating
+                    feedback.overallRating = overallRating
+                    feedback.comments = comments
+                    mReference.push().setValue(feedback).addOnSuccessListener {
+                        progress.visibility = View.INVISIBLE
+                        MethodUtils.showSnackBar("Thanks for your feedback")
+                        clear()
+                    }.addOnFailureListener {
+                        progress.visibility = View.INVISIBLE
+                        MethodUtils.showSnackBar("Something went wrong")
+                        enable()
+                        submit.text = "Send Feedback"
+                        submit.isEnabled = true
+                        Log.e(TAG, "Error: ${it.localizedMessage}")
+                    }
+                }
             }
         }
         return root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putFloat("refreshment", refreshment.rating)
+        outState.putFloat("venue", venue.rating)
+        outState.putFloat("time", timeManagement.rating)
+        outState.putFloat("overall", overall.rating)
+        outState.putString("comment", feedbackComplain.text.toString())
+        super.onSaveInstanceState(outState)
+    }
+
     private fun disable() {
-        planning.isEnabled = false
+        refreshment.isEnabled = false
         venue.isEnabled = false
         timeManagement.isEnabled = false
         overall.isEnabled = false
@@ -98,7 +126,7 @@ class FeedbackFragment : Fragment() {
     }
 
     private fun enable() {
-        planning.isEnabled = true
+        refreshment.isEnabled = true
         venue.isEnabled = true
         timeManagement.isEnabled = true
         overall.isEnabled = true
@@ -106,7 +134,7 @@ class FeedbackFragment : Fragment() {
     }
 
     private fun clear() {
-        planning.rating = 0f
+        refreshment.rating = 0f
         venue.rating = 0f
         timeManagement.rating = 0f
         overall.rating = 0f
@@ -114,7 +142,7 @@ class FeedbackFragment : Fragment() {
         feedbackComplain.text.clear()
         submit.isEnabled = true
         submit.text = "Send Feedback"
-        val ft : FragmentTransaction? = fragmentManager?.beginTransaction()
+        val ft: FragmentTransaction? = fragmentManager?.beginTransaction()
         ft?.detach(this)?.attach(this)?.commit()
     }
 }
