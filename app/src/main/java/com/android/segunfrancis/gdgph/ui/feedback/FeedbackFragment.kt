@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.android.segunfrancis.gdgph.R
 import com.android.segunfrancis.gdgph.model.Feedback
 import com.android.segunfrancis.gdgph.utility.MethodUtils
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.showSnackBar
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -71,7 +72,7 @@ class FeedbackFragment : Fragment() {
             if (mAuth.currentUser == null) {
                 MethodUtils.showSnackBar("Sign in to send feedback")
             } else {
-                if (refreshment.rating == 0f || venue.rating == 0f || timeManagement.rating == 0f) {
+                if (refreshment.rating == 0f || venue.rating == 0f || timeManagement.rating == 0f || overall.rating == 0f) {
                     MethodUtils.showSnackBar("A rating of 0 is not allowed")
                 } else {
                     submit.text = "Sending..."
@@ -92,11 +93,11 @@ class FeedbackFragment : Fragment() {
                     feedback.comments = comments
                     mReference.push().setValue(feedback).addOnSuccessListener {
                         progress.visibility = View.INVISIBLE
-                        MethodUtils.showSnackBar("Thanks for your feedback")
+                        showSnackBar("Thanks for your feedback")
                         clear()
                     }.addOnFailureListener {
                         progress.visibility = View.INVISIBLE
-                        MethodUtils.showSnackBar("Something went wrong")
+                        showSnackBar("Something went wrong")
                         enable()
                         submit.text = "Send Feedback"
                         submit.isEnabled = true

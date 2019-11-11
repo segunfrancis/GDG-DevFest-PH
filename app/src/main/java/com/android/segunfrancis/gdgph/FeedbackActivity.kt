@@ -2,20 +2,25 @@ package com.android.segunfrancis.gdgph
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.RatingBar
 import androidx.appcompat.widget.Toolbar
+import com.android.segunfrancis.gdgph.model.SpeakerFeedback
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class FeedbackActivity : AppCompatActivity() {
 
-    lateinit var mProgressBar: ProgressBar
+    private lateinit var mProgressBar: ProgressBar
     private lateinit var clarity: RatingBar
     private lateinit var knowledgeOfTopic: RatingBar
     private lateinit var overall: RatingBar
@@ -27,6 +32,10 @@ class FeedbackActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback)
+
+        val intent = intent
+        val clickedPosition = intent.getIntExtra("feedback_position", -1)
+        Log.d(TAG, "clickedPosition: $clickedPosition")
 
         // Hide Keyboard
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -40,16 +49,49 @@ class FeedbackActivity : AppCompatActivity() {
         sendFeedbackButton = findViewById(R.id.send_feedback)
         mProgressBar = findViewById(R.id.progressBar_horizontal)
         mAuth = FirebaseAuth.getInstance()
-
+        mRef = FirebaseDatabase.getInstance().reference.child("schedule")
 
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
 
         sendFeedbackButton.setOnClickListener {
-            mProgressBar.visibility = View.VISIBLE
-            sendFeedbackButton.text = "Sending..."
-            sendFeedbackButton.isEnabled = false
+            if (clarity.rating == 0f || knowledgeOfTopic.rating == 0f || overall.rating == 0f) {
+                showSnackBar("A rating of 0 is not allowed")
+            } else {
+                mProgressBar.visibility = View.VISIBLE
+
+                disable()
+
+                val clarityRating = clarity.rating
+                val knowledgeRating = knowledgeOfTopic.rating
+                val overallRating = overall.rating
+                val comments = feedbackComplains.text.toString()
+
+                val feedback = SpeakerFeedback()
+                feedback.clarity = clarityRating
+                feedback.knowledgeOfTopic = knowledgeRating
+                feedback.overall = overallRating
+                feedback.comments = comments
+
+                mRef.child(clickedPosition.toString())
+                    .child("speakerFeedback")
+                    .child(mAuth.currentUser!!.uid)
+                    .setValue(feedback)
+                    .addOnCompleteListener(this, object : OnCompleteListener<Void?> {
+                        override fun onComplete(task: Task<Void?>) {
+                            if (task.isSuccessful) {
+                                enable()
+                                clear()
+                                showSnackBar("Thanks for your feedback")
+                            } else {
+                                enable()
+                                showSnackBar("Something went wrong")
+                                Log.e(TAG, "Error", task.exception)
+                            }
+                        }
+                    })
+            }
         }
     }
 
@@ -58,6 +100,8 @@ class FeedbackActivity : AppCompatActivity() {
         knowledgeOfTopic.isEnabled = false
         overall.isEnabled = false
         feedbackComplains.isEnabled = false
+        sendFeedbackButton.text = "Sending..."
+        sendFeedbackButton.isEnabled = false
     }
 
     private fun enable() {
@@ -65,6 +109,7 @@ class FeedbackActivity : AppCompatActivity() {
         knowledgeOfTopic.isEnabled = true
         overall.isEnabled = true
         feedbackComplains.isEnabled = true
+        sendFeedbackButton.text = "Send Feedback"
     }
 
     private fun clear() {
@@ -76,5 +121,17 @@ class FeedbackActivity : AppCompatActivity() {
         sendFeedbackButton.isEnabled = true
         sendFeedbackButton.text = "Send Feedback"
         recreate()
+    }
+
+    private fun showSnackBar(message: String) {
+        val snackBar =
+            Snackbar.make(clarity, message, Snackbar.LENGTH_LONG)
+        val snackBarView = snackBar.view
+        snackBarView.setBackgroundResource(R.color.colorPrimary)
+        snackBar.show()
+    }
+
+    companion object {
+        const val TAG = "FeedbackActivity"
     }
 }

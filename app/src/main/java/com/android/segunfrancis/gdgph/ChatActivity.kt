@@ -18,12 +18,12 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
+import androidx.annotation.Keep
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.segunfrancis.gdgph.adapter.ChatAdapter
 import com.android.segunfrancis.gdgph.model.Chat
-import com.android.segunfrancis.gdgph.utility.MethodUtils
 import com.google.android.gms.tasks.Task
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -32,6 +32,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
+@Keep
 class ChatActivity : AppCompatActivity(), AIListener {
 
     private lateinit var mEditText: EditText
