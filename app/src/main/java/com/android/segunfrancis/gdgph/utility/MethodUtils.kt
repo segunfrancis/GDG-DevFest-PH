@@ -4,7 +4,6 @@ import android.animation.AnimatorInflater
 import android.content.Context
 import android.net.Uri
 import android.view.View
-import androidx.fragment.app.Fragment
 import com.android.segunfrancis.gdgph.DetailsActivity
 import com.android.segunfrancis.gdgph.R
 import com.bumptech.glide.Glide
@@ -57,10 +56,8 @@ class MethodUtils {
             }
         }
 
-        fun drawerNavigation(fragment: Fragment, tag: String) {
-            fragment.fragmentManager?.beginTransaction()?.replace(R.id.container, fragment, tag)?.commit()
-        }
-
         const val INTENT_KEY = "com.android.segunfrancis.gdgph.MethodUtils.INTENT_KEY"
+        const val PREF_KEY = "com.android.segunfrancis.gdgph.MethodUtils.PREF_KEY"
+        const val FIRST_TIME = "com.android.segunfrancis.gdgph.MethodUtils.FIRST_TIME"
     }
 }

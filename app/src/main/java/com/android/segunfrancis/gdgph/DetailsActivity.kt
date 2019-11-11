@@ -3,6 +3,7 @@ package com.android.segunfrancis.gdgph
 import android.animation.AnimatorInflater
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.FIRST_TIME
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.PREF_KEY
 import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.loadImage
 import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.showSnackBar
 import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.updateSignInText
@@ -44,10 +47,16 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var progressBar: ProgressBar
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var preference: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+        preference = getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE)
+        val editor = preference.edit()
+        editor.putBoolean(FIRST_TIME, false)
+        editor.apply()
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 

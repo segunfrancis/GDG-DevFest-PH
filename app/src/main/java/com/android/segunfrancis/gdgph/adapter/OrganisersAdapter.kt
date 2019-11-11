@@ -36,6 +36,7 @@ class OrganisersAdapter: RecyclerView.Adapter<OrganisersAdapter.OrganisersViewHo
         holder.organiserCommunity.text = mOrganisersList[position].community
         Glide.with(mContext)
             .load(mOrganisersList[position].imageUrl)
+            .placeholder(R.drawable.avatar)
             .into(holder.organiserImage)
     }
 

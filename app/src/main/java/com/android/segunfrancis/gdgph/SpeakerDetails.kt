@@ -30,6 +30,7 @@ class SpeakerDetails : AppCompatActivity() {
         val speakerSession: TextView = findViewById(R.id.speaker_session_textView)
         Glide.with(this@SpeakerDetails)
             .load(speakers.profilePicture)
+            .placeholder(R.drawable.avatar)
             .into(speakerImage)
         speakerTagLine.text = speakers.tagLine
         speakerBio.text = speakers.bio

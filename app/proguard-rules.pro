@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keepattributes Signature
+
+# This rule will properly ProGuard all the model classes in
+# the models package.
+-keepclassmembers class com.android.segunfrancis.gdgph.model.** {
+    *;
+}

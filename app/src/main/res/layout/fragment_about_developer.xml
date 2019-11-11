@@ -87,17 +87,32 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/description2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/raleway"
-                    android:text="Learning Kotlin wasn\'t easy but it has been eventful. This application was built using the Kotlin programming language. \nViewModel architecture was used and Firebase was used for google authentication and data storage."
+                    android:text="This application was built using the Kotlin programming language. \nViewModel architecture was used and Firebase was used for google authentication and data storage."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintBottom_toTopOf="@id/description3"
+                    app:layout_constraintEnd_toEndOf="@+id/description"
+                    app:layout_constraintStart_toStartOf="@+id/description"
+                    app:layout_constraintTop_toBottomOf="@+id/description" />
+
+                <TextView
+                    android:id="@+id/description3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/raleway"
+                    android:text="I hope you find this application helpful.\nHave a great time in DevFest 2019"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/description"
                     app:layout_constraintStart_toStartOf="@+id/description"
-                    app:layout_constraintTop_toBottomOf="@+id/description" />
+                    app:layout_constraintTop_toBottomOf="@+id/description2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 

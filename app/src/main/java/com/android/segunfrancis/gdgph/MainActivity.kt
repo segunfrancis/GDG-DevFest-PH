@@ -1,5 +1,8 @@
 package com.android.segunfrancis.gdgph
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -7,6 +10,8 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.android.segunfrancis.gdgph.adapter.PagerAdapter
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.FIRST_TIME
+import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.PREF_KEY
 import com.bumptech.glide.Glide
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +30,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpViewPager() {
         val viewPager = findViewById<ViewPager2>(R.id.view_pager)
-        val fragmentList = arrayListOf(OnBoardingFragment1.newInstance(), OnBoardingFragment2.newInstance())
+        val fragmentList =
+            arrayListOf(OnBoardingFragment1.newInstance(), OnBoardingFragment2.newInstance())
         val radioGroup = findViewById<RadioGroup>(R.id.radio_group)
         viewPager.adapter = PagerAdapter(this@MainActivity, fragmentList)
 
@@ -42,5 +48,15 @@ class MainActivity : AppCompatActivity() {
                 radioGroup.check(radioButtonId)
             }
         })
+    }
+
+    override fun onStart() {
+        val pref = getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE)
+        val firstTime = pref.getBoolean(FIRST_TIME, true)
+        if (!firstTime) {
+            val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+            startActivity(intent)
+        }
+        super.onStart()
     }
 }

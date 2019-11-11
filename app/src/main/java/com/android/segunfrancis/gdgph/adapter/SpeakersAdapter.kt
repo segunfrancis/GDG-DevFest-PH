@@ -25,7 +25,13 @@ class SpeakersAdapter : RecyclerView.Adapter<SpeakersAdapter.SpeakersViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpeakersViewHolder {
-        return SpeakersViewHolder(LayoutInflater.from(mContext).inflate(R.layout.organisers_list, parent, false))
+        return SpeakersViewHolder(
+            LayoutInflater.from(mContext).inflate(
+                R.layout.organisers_list,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount() = mSpeakersList.size
@@ -37,6 +43,7 @@ class SpeakersAdapter : RecyclerView.Adapter<SpeakersAdapter.SpeakersViewHolder>
         holder.speakerTag.text = mSpeakersList[position].tagLine
         Glide.with(mContext)
             .load(mSpeakersList[position].profilePicture)
+            .placeholder(R.drawable.avatar)
             .into(holder.speakerImage)
     }
 
