@@ -24,9 +24,9 @@ class OnBoardingFragment2 : Fragment() {
 
     private fun nextActivity() {
         val intent = Intent(context, DetailsActivity::class.java)
-        startActivity(intent)
-        activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        context?.startActivity(intent)
         activity?.finish()
+        activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     companion object {

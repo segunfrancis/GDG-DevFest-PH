@@ -120,12 +120,11 @@ class FeedbackActivity : AppCompatActivity() {
         feedbackComplains.text.clear()
         sendFeedbackButton.isEnabled = true
         sendFeedbackButton.text = "Send Feedback"
-        recreate()
     }
 
     private fun showSnackBar(message: String) {
         val snackBar =
-            Snackbar.make(clarity, message, Snackbar.LENGTH_LONG)
+            Snackbar.make(sendFeedbackButton, message, Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
         snackBarView.setBackgroundResource(R.color.colorPrimary)
         snackBar.show()

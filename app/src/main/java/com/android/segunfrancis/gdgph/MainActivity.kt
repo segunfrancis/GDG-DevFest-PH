@@ -2,7 +2,6 @@ package com.android.segunfrancis.gdgph
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -15,6 +14,7 @@ import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.PREF_KEY
 import com.bumptech.glide.Glide
 
 class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         if (!firstTime) {
             val intent = Intent(this@MainActivity, DetailsActivity::class.java)
             startActivity(intent)
+            finish()
         }
         super.onStart()
     }

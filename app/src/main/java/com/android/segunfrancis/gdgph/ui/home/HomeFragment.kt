@@ -2,11 +2,11 @@ package com.android.segunfrancis.gdgph.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -17,12 +17,33 @@ import com.android.segunfrancis.gdgph.DetailsActivity
 import com.android.segunfrancis.gdgph.R
 import com.android.segunfrancis.gdgph.adapter.ActivitiesAdapter
 import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.showSnackBar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var mActivitiesAdapter: ActivitiesAdapter
+
+    // Overriding default back button
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val dialog = MaterialAlertDialogBuilder(context)
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton("YES") { dialogInterface, i ->
+                        dialogInterface.dismiss()
+                        android.os.Process.killProcess(android.os.Process.myPid())
+                    }
+                    .setNegativeButton("NO") { dialogInterface, i ->
+                        dialogInterface.dismiss()
+                    }
+                dialog.create().show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this@HomeFragment, onBackPressedCallback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,7 +59,6 @@ class HomeFragment : Fragment() {
                 activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         }
-
         val progressBar: ProgressBar = root.findViewById(R.id.progress_bar)
         progressBar.visibility = View.VISIBLE
         recyclerView.layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.VERTICAL, false)
