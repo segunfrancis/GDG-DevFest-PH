@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.android.segunfrancis.gdgph.model.Speakers
-import com.android.segunfrancis.gdgph.ui.speakers.SpeakersViewModel
 import com.android.segunfrancis.gdgph.utility.MethodUtils.Companion.INTENT_KEY
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.MaterialToolbar
@@ -23,10 +22,6 @@ class SpeakerDetails : AppCompatActivity() {
 
         val intent = intent
         val speakers: Speakers = intent.getSerializableExtra(INTENT_KEY) as Speakers
-
-        val position = intent.getIntExtra("position", -1)
-        val bundle = Bundle()
-        bundle.putInt("position", position)
 
         mSpeakerDetailsViewModel =
             ViewModelProviders.of(this@SpeakerDetails, SpeakerDetailsViewModel(this.application, speakers)).get(SpeakerDetailsViewModel::class.java)
@@ -49,7 +44,7 @@ class SpeakerDetails : AppCompatActivity() {
         speakerTagLine.text = speakers.tagLine
         speakerBio.text = speakers.bio
         for (i in speakers.sessions) {
-            speakerSession.text = i.toString()
+            speakerSession.text = i
         }
         mSpeakerDetailsViewModel.rating.observe(this, Observer {
             if (it != null) {
