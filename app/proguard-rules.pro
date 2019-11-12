@@ -27,3 +27,5 @@
 -keepclassmembers class com.android.segunfrancis.gdgph.model.** {
     *;
 }
+-keep class ai.api.** { *; }
+-keep class commons-io.** { *; }

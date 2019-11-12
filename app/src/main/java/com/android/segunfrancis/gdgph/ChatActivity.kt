@@ -18,7 +18,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
-import androidx.annotation.Keep
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +31,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-@Keep
 class ChatActivity : AppCompatActivity(), AIListener {
 
     private lateinit var mEditText: EditText
