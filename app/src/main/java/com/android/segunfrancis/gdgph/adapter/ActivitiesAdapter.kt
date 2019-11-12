@@ -97,7 +97,7 @@ class ActivitiesAdapter : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewH
             feedbackTextView.setOnClickListener {
                 if (auth.currentUser != null) {
                     val intent = Intent(it.context.applicationContext, FeedbackActivity::class.java)
-                    intent.putExtra("feedback_position", adapterPosition)
+                    intent.putExtra("speaker_name", item.speakerName)
                     it.context.startActivity(intent)
                 } else {
                     MethodUtils.showSnackBar("Sign in to give feedback")

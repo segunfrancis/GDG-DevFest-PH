@@ -34,8 +34,8 @@ class FeedbackActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feedback)
 
         val intent = intent
-        val clickedPosition = intent.getIntExtra("feedback_position", -1)
-        Log.d(TAG, "clickedPosition: $clickedPosition")
+        val speakerName = intent.getStringExtra("speaker_name")
+        Log.d(TAG, "clickedPosition: $speakerName")
 
         // Hide Keyboard
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -49,7 +49,7 @@ class FeedbackActivity : AppCompatActivity() {
         sendFeedbackButton = findViewById(R.id.send_feedback)
         mProgressBar = findViewById(R.id.progressBar_horizontal)
         mAuth = FirebaseAuth.getInstance()
-        mRef = FirebaseDatabase.getInstance().reference.child("schedule")
+        mRef = FirebaseDatabase.getInstance().reference
 
         toolbar.setNavigationOnClickListener {
             onBackPressed()
@@ -66,7 +66,7 @@ class FeedbackActivity : AppCompatActivity() {
                 val clarityRating = clarity.rating
                 val knowledgeRating = knowledgeOfTopic.rating
                 val overallRating = overall.rating
-                val comments = feedbackComplains.text.toString()
+                val comments = feedbackComplains.text.toString().trim()
 
                 val feedback = SpeakerFeedback()
                 feedback.clarity = clarityRating
@@ -74,16 +74,16 @@ class FeedbackActivity : AppCompatActivity() {
                 feedback.overall = overallRating
                 feedback.comments = comments
 
-                mRef.child(clickedPosition.toString())
-                    .child("speakerFeedback")
+                mRef.child("speakerFeedback")
+                    .child(speakerName)
                     .child(mAuth.currentUser!!.uid)
                     .setValue(feedback)
                     .addOnCompleteListener(this, object : OnCompleteListener<Void?> {
                         override fun onComplete(task: Task<Void?>) {
                             if (task.isSuccessful) {
+                                showSnackBar("Thanks for your feedback")
                                 enable()
                                 clear()
-                                showSnackBar("Thanks for your feedback")
                             } else {
                                 enable()
                                 showSnackBar("Something went wrong")
