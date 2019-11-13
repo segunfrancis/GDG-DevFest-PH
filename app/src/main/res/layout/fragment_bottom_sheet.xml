@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    tools:context=".BottomSheet">
+    tools:context="com.gdg.segunfrancis.gdgph.BottomSheet">
 
     <ImageView
         android:id="@+id/imageView"

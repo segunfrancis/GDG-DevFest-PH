@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsActivity"
+    tools:context="com.gdg.segunfrancis.gdgph.DetailsActivity"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.android.segunfrancis.gdgph">
+    package="com.gdg.segunfrancis.gdgph">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,19 +14,19 @@
         android:roundIcon="@drawable/ic_gdg_logob"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SpeakerDetails" />
-        <activity android:name=".FeedbackActivity" />
-        <activity android:name=".ChatActivity" />
+        <activity android:name="com.gdg.segunfrancis.gdgph.SpeakerDetails" />
+        <activity android:name="com.gdg.segunfrancis.gdgph.FeedbackActivity" />
+        <activity android:name="com.gdg.segunfrancis.gdgph.ChatActivity" />
         <activity
-            android:name=".DetailsActivity"
+            android:name="com.gdg.segunfrancis.gdgph.DetailsActivity"
             android:label="@string/title_activity_details"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.segunfrancis.gdgph.MainActivity" />
+                android:value="com.gdg.segunfrancis.gdgph.MainActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.gdg.segunfrancis.gdgph.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

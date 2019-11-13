@@ -7,37 +7,37 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.android.segunfrancis.gdgph.ui.home.HomeFragment"
+        android:name="com.gdg.segunfrancis.gdgph.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_about_us"
-        android:name="com.android.segunfrancis.gdgph.ui.about.AboutFragment"
+        android:name="com.gdg.segunfrancis.gdgph.ui.about.AboutFragment"
         android:label="@string/menu_about"
         tools:layout="@layout/fragment_about_developer" />
 
     <fragment
         android:id="@+id/nav_feedback"
-        android:name="com.android.segunfrancis.gdgph.ui.feedback.FeedbackFragment"
+        android:name="com.gdg.segunfrancis.gdgph.ui.feedback.FeedbackFragment"
         android:label="@string/menu_feedback"
         tools:layout="@layout/fragment_feedback" />
 
     <fragment
         android:id="@+id/nav_join_gdg"
-        android:name="com.android.segunfrancis.gdgph.ui.joinGDG.JoinGDGFragment"
+        android:name="com.gdg.segunfrancis.gdgph.ui.joinGDG.JoinGDGFragment"
         android:label="@string/menu_join_gdg"
         tools:layout="@layout/fragment_join_gdg" />
 
     <fragment
         android:id="@+id/nav_speakers"
-        android:name="com.android.segunfrancis.gdgph.ui.speakers.SpeakersFragment"
+        android:name="com.gdg.segunfrancis.gdgph.ui.speakers.SpeakersFragment"
         android:label="@string/menu_speakers"
         tools:layout="@layout/fragment_speakers" />
 
     <fragment
         android:id="@+id/nav_organisers"
-        android:name="com.android.segunfrancis.gdgph.ui.organisers.OrganisersFragment"
+        android:name="com.gdg.segunfrancis.gdgph.ui.organisers.OrganisersFragment"
         android:label="@string/menu_organisers"
         tools:layout="@layout/fragment_organisers" />
 </navigation>

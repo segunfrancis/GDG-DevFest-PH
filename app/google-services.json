@@ -45,17 +45,17 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:282836095015:android:7e983598c9e64f87413e02",
+        "mobilesdk_app_id": "1:282836095015:android:40b13d8ffcd96b33413e02",
         "android_client_info": {
-          "package_name": "com.android.segunfrancis.gdgph"
+          "package_name": "com.gdg.segunfrancis.gdgph"
         }
       },
       "oauth_client": [
         {
-          "client_id": "282836095015-hibfd5qv5bo9721tunl73n7nioabb5tb.apps.googleusercontent.com",
+          "client_id": "282836095015-8cnvoahifjbn2ugosdt9onie83amg66o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.android.segunfrancis.gdgph",
+            "package_name": "com.gdg.segunfrancis.gdgph",
             "certificate_hash": "3a717cc81d8b128c2ae6ca7d5578f223aa77b374"
           }
         },
