@@ -93,7 +93,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/raleway"
-                    android:text="This application was built using the Kotlin programming language. \nViewModel architecture was used and Firebase was used for google authentication and data storage."
+                    android:text="This application was built using Kotlin and MVVM architecture.\nFirebase was used for google authentication and data storage."
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintBottom_toTopOf="@id/description3"
                     app:layout_constraintEnd_toEndOf="@+id/description"
