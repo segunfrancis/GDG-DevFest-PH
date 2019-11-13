@@ -24,7 +24,7 @@
 
 # This rule will properly ProGuard all the model classes in
 # the models package.
--keepclassmembers class com.android.segunfrancis.gdgph.model.** {
+-keepclassmembers class com.gdg.segunfrancis.gdgph.model.** {
     *;
 }
 -keep class ai.api.** { *; }
