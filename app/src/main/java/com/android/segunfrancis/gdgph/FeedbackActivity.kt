@@ -81,11 +81,13 @@ class FeedbackActivity : AppCompatActivity() {
                     .addOnCompleteListener(this, object : OnCompleteListener<Void?> {
                         override fun onComplete(task: Task<Void?>) {
                             if (task.isSuccessful) {
+                                mProgressBar.visibility = View.GONE
                                 showSnackBar("Thanks for your feedback")
                                 enable()
                                 clear()
                             } else {
                                 enable()
+                                mProgressBar.visibility = View.GONE
                                 showSnackBar("Something went wrong")
                                 Log.e(TAG, "Error", task.exception)
                             }
