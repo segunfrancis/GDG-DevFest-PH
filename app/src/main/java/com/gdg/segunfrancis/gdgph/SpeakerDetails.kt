@@ -7,7 +7,6 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.gdg.segunfrancis.gdgph.R
 import com.gdg.segunfrancis.gdgph.model.Speakers
 import com.gdg.segunfrancis.gdgph.utility.MethodUtils.Companion.INTENT_KEY
 import com.bumptech.glide.Glide

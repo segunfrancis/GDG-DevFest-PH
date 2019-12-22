@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.viewpager2.widget.ViewPager2
-import com.gdg.segunfrancis.gdgph.R
 import com.gdg.segunfrancis.gdgph.adapter.PagerAdapter
 import com.gdg.segunfrancis.gdgph.utility.MethodUtils.Companion.FIRST_TIME
 import com.gdg.segunfrancis.gdgph.utility.MethodUtils.Companion.PREF_KEY

@@ -2,7 +2,6 @@ package com.gdg.segunfrancis.gdgph
 
 import android.animation.AnimatorInflater
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
@@ -23,7 +22,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.gdg.segunfrancis.gdgph.R
 import com.gdg.segunfrancis.gdgph.utility.MethodUtils.Companion.FIRST_TIME
 import com.gdg.segunfrancis.gdgph.utility.MethodUtils.Companion.PREF_KEY
 import com.gdg.segunfrancis.gdgph.utility.MethodUtils.Companion.loadImage
@@ -41,7 +39,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.makeramen.roundedimageview.RoundedImageView
 
 import java.lang.Exception
-import kotlin.system.exitProcess
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -97,42 +94,6 @@ class DetailsActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        /* navView.setNavigationItemSelectedListener { item ->
-             val id = item.itemId
-             var fragment: Fragment? = null
-             var tag = ""
-             when (id) {
-                 R.id.nav_home -> {
-                     fragment = HomeFragment()
-                     tag = "HomeFragment"
-                 }
-                 R.id.nav_feedback -> {
-                     fragment = FeedbackFragment()
-                     tag = "FeedbackFragment"
-                 }
-                 R.id.nav_about_us -> {
-                     fragment = AboutFragment()
-                     tag = "AboutFragment"
-                 }
-                 R.id.nav_join_gdg -> {
-                     fragment = JoinGDGFragment()
-                     tag = "JoinGDGFragment"
-                 }
-                 R.id.nav_organisers -> {
-                     fragment = OrganisersFragment()
-                     tag = "OrganisersFragment"
-                 }
-                 R.id.nav_share -> {
-                     fragment = SpeakersFragment()
-                     tag = "SpeakersFragment"
-                 }
-             }
-             if (fragment != null) {
-                 drawerNavigation(fragment, tag)
-             }
-             true
-         }*/
 
         progressBar = findViewById(R.id.progress_bar_detail)
 
