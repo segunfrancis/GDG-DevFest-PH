@@ -23,10 +23,9 @@ Clone this repository and import into android studio
 Use the android studio _Build Variants_ button to choose between **production** and **staging** flavours combined with **debug** and **release** build types.
 
 ## Screenshots
-![screen1]() 
-![screen2]()
-![screen3]()
-![screen4]()
+![screen1](https://github.com/segunfrancis/GDG-DevFest-PH/blob/master/Screenshot_20200216-123405.png) 
+![screen2](https://github.com/segunfrancis/GDG-DevFest-PH/blob/master/Screenshot_20200216-123413.png)
+![screen3](https://github.com/segunfrancis/GDG-DevFest-PH/blob/master/Screenshot_20200216-123621.png)
 
 ## APK file
 You can download the APK file for this project [here](https://drive.google.com/file/d/1G4-4BDmU24cpNowBZTYbm-dhlaLTVm-q/view?usp=drivesdk)
