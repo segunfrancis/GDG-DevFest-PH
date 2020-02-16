@@ -11,8 +11,8 @@ An android app that contains information about the DevFest Port Harcourt event. 
 - A feedback section
 
 ## SDK Requirements
-- Minimum SDK Requirement - android API 16 (Jelly Bean)
-- Target SDK - android API 28 (Pie)
+- Minimum SDK Requirement - android API 19 (Kit Kat)
+- Target SDK - android API 29 (Android 10)
 
 ## Installation
 Clone this repository and import into android studio
@@ -28,4 +28,5 @@ Use the android studio _Build Variants_ button to choose between **production** 
 ![screen3](https://github.com/segunfrancis/GDG-DevFest-PH/blob/master/Screenshot_20200216-123621.png)
 
 ## APK file
-You can download the APK file for this project [here](https://drive.google.com/file/d/1G4-4BDmU24cpNowBZTYbm-dhlaLTVm-q/view?usp=drivesdk)
+
+[<img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/en_get.svg" width="50%">](https://play.google.com/store/apps/details?id=com.gdg.segunfrancis.gdgph)
